@@ -9,7 +9,7 @@ import {
   SettingsState,
   StatisticsState,
 } from './types/game';
-import { storageService } from './services/storage';
+import { gameStorage } from './utils/gameStorage';
 import { audioService } from './services/audio';
 import { generateDailyChallenge, getTodayDateSeed } from './game/dailyChallengeGenerator';
 import { Splash } from './components/screens/Splash';
@@ -35,11 +35,11 @@ export const App: React.FC = () => {
   );
   const [pendingIntroMode, setPendingIntroMode] = useState<GameMode | null>(null);
 
-  const [settings, setSettings] = useState<SettingsState>(() => storageService.getSettings());
-  const [records, setRecords] = useState<RecordsState>(() => storageService.getRecords());
-  const [stats, setStats] = useState<StatisticsState>(() => storageService.getStats());
-  const [tutorial, setTutorial] = useState(() => storageService.getTutorial());
-  const [intros, setIntros] = useState<FirstTimeIntrosState>(() => storageService.getFirstTimeIntros());
+  const [settings, setSettings] = useState<SettingsState>(() => gameStorage.loadSettings());
+  const [records, setRecords] = useState<RecordsState>(() => gameStorage.loadRecords());
+  const [stats, setStats] = useState<StatisticsState>(() => gameStorage.loadStats());
+  const [tutorial, setTutorial] = useState(() => gameStorage.loadTutorial());
+  const [intros, setIntros] = useState<FirstTimeIntrosState>(() => gameStorage.loadFirstTimeIntros());
 
   // Ambient music toggle
   useEffect(() => {
@@ -52,6 +52,34 @@ export const App: React.FC = () => {
     document.documentElement.setAttribute('data-theme', activeTheme);
   }, [settings.theme]);
 
+  // Auto-save all state when app/page is hidden, backgrounded, or closed
+  useEffect(() => {
+    const flushAutoSave = () => {
+      gameStorage.saveSettings(settings);
+      gameStorage.saveRecords(records);
+      gameStorage.saveStats(stats);
+      gameStorage.saveTutorial(tutorial);
+      gameStorage.saveFirstTimeIntros(intros);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        flushAutoSave();
+      }
+    };
+
+    window.addEventListener('beforeunload', flushAutoSave);
+    window.addEventListener('pagehide', flushAutoSave);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('beforeunload', flushAutoSave);
+      window.removeEventListener('pagehide', flushAutoSave);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [settings, records, stats, tutorial, intros]);
+
+
   const handleSplashFinish = () => {
     if (!tutorial.completed) {
       setActiveScreen('TUTORIAL');
@@ -63,7 +91,7 @@ export const App: React.FC = () => {
   const handleTutorialComplete = () => {
     const updated = { completed: true };
     setTutorial(updated);
-    storageService.saveTutorial(updated);
+    gameStorage.saveTutorial(updated);
     setActiveScreen('MAIN_MENU');
   };
 
@@ -126,7 +154,7 @@ export const App: React.FC = () => {
     if (mode === 'DAILY_CHALLENGE') updatedIntros.dailyShown = true;
 
     setIntros(updatedIntros);
-    storageService.saveFirstTimeIntros(updatedIntros);
+    gameStorage.saveFirstTimeIntros(updatedIntros);
     setPendingIntroMode(null);
 
     if (mode === 'MOVES_CHALLENGE') {
@@ -159,28 +187,29 @@ export const App: React.FC = () => {
 
   const handleUpdateSettings = (newSettings: SettingsState) => {
     setSettings(newSettings);
-    storageService.saveSettings(newSettings);
+    gameStorage.saveSettings(newSettings);
   };
 
   const handleUpdateRecords = (newRecords: RecordsState) => {
     setRecords(newRecords);
-    storageService.saveRecords(newRecords);
+    gameStorage.saveRecords(newRecords);
   };
 
   const handleUpdateStats = (newStats: StatisticsState) => {
     setStats(newStats);
-    storageService.saveStats(newStats);
+    gameStorage.saveStats(newStats);
   };
 
   const handleResetProgress = () => {
-    storageService.resetAllProgress();
-    setRecords(storageService.getRecords());
-    setStats(storageService.getStats());
-    setSettings(storageService.getSettings());
-    setTutorial(storageService.getTutorial());
-    setIntros(storageService.getFirstTimeIntros());
+    gameStorage.resetAllProgress();
+    setRecords(gameStorage.loadRecords());
+    setStats(gameStorage.loadStats());
+    setSettings(gameStorage.loadSettings());
+    setTutorial(gameStorage.loadTutorial());
+    setIntros(gameStorage.loadFirstTimeIntros());
     setActiveScreen('MAIN_MENU');
   };
+
 
   return (
     <div className="app-container">
@@ -217,12 +246,14 @@ export const App: React.FC = () => {
 
       {activeScreen === 'GAMEPLAY' && (
         <GameplayScreen
+          key={`${selectedMode}_${selectedChallenge?.id || 'main'}_${currentDailyChallenge?.dateSeed || ''}`}
           mode={selectedMode}
           challengeLevel={selectedChallenge}
           dailyChallenge={currentDailyChallenge}
           settings={settings}
           records={records}
           stats={stats}
+          onUpdateSettings={handleUpdateSettings}
           onUpdateRecords={handleUpdateRecords}
           onUpdateStats={handleUpdateStats}
           onSelectChallenge={handleSelectChallengeLevel}

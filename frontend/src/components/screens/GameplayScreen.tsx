@@ -41,7 +41,7 @@ import { processSpecialTilesAfterMove, spawnSpecialTile } from '../../game/speci
 import { getTodayDateSeed } from '../../game/dailyChallengeGenerator';
 import { audioService } from '../../services/audio';
 import { hapticPatterns, triggerHaptic } from '../../services/haptics';
-import { storageService } from '../../services/storage';
+import { gameStorage } from '../../utils/gameStorage';
 import { apiService } from '../../services/api';
 import './GameplayScreen.css';
 
@@ -52,6 +52,7 @@ interface GameplayScreenProps {
   settings: SettingsState;
   records: RecordsState;
   stats: StatisticsState;
+  onUpdateSettings?: (newSettings: SettingsState) => void;
   onUpdateRecords: (newRecords: RecordsState) => void;
   onUpdateStats: (newStats: StatisticsState) => void;
   onSelectChallenge?: (level: ChallengeLevel) => void;
@@ -65,6 +66,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
   settings,
   records,
   stats,
+  onUpdateSettings,
   onUpdateRecords,
   onUpdateStats,
   onSelectChallenge,
@@ -90,7 +92,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
 
   // Load existing saved game state if matching mode/challenge, else init
   const [gameState, setGameState] = useState<GameState>(() => {
-    const saved = storageService.getGameState();
+    const saved = gameStorage.loadGameState();
     if (
       saved &&
       saved.mode === mode &&
@@ -209,9 +211,25 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
     return () => clearInterval(timer);
   }, [mode, gameState.isPaused, gameState.isGameOver, settings.soundEnabled, settings.vibrationEnabled]);
 
-  // Save game state locally
+  // Save game state locally and listen for app background / hide events
   useEffect(() => {
-    storageService.saveGameState(gameState);
+    gameStorage.saveGameState(gameState);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        gameStorage.saveGameState(gameState);
+      }
+    };
+
+    window.addEventListener('beforeunload', () => gameStorage.saveGameState(gameState));
+    window.addEventListener('pagehide', () => gameStorage.saveGameState(gameState));
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('beforeunload', () => gameStorage.saveGameState(gameState));
+      window.removeEventListener('pagehide', () => gameStorage.saveGameState(gameState));
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, [gameState]);
 
   // Handle Swipe Gesture
@@ -686,8 +704,10 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
     const nextIdx = (themes.indexOf(current) + 1) % themes.length;
     const nextTheme = themes[nextIdx];
     const updated = { ...settings, theme: nextTheme };
-    storageService.saveSettings(updated);
-    // Notify parent if needed or state updates automatically
+    gameStorage.saveSettings(updated);
+    if (onUpdateSettings) {
+      onUpdateSettings(updated);
+    }
   };
 
   const handlePause = () => {
