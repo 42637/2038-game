@@ -1,0 +1,163 @@
+.tutorial-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.tutorial-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.tutorial-header h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--bg-surface-hover);
+  transition: all 0.2s ease;
+}
+
+.step-dot.active {
+  background-color: var(--accent-primary);
+  width: 24px;
+  border-radius: var(--radius-full);
+}
+
+.step-dot.completed {
+  background-color: var(--accent-success);
+}
+
+.tutorial-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tutorial-card {
+  width: 100%;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.tutorial-card h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.tutorial-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.hint-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+/* Interactive board preview */
+.interactive-board-preview {
+  width: 220px;
+  height: 220px;
+  background-color: var(--bg-board);
+  border-radius: var(--radius-md);
+  position: relative;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swipe-hand-anim {
+  position: absolute;
+  color: var(--text-light);
+  opacity: 0.7;
+  animation: handSwipe 1.8s infinite ease-in-out;
+  z-index: 10;
+}
+
+@keyframes handSwipe {
+  0% { transform: translate(-30px, 0); opacity: 0.2; }
+  50% { transform: translate(30px, 0); opacity: 0.9; }
+  100% { transform: translate(-30px, 0); opacity: 0.2; }
+}
+
+.demo-tile {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pos-left { position: absolute; left: 30px; }
+.pos-right { position: absolute; right: 30px; }
+
+.t-2 { background-color: var(--tile-2); color: var(--tile-2-text); }
+.t-4 { background-color: var(--tile-4); color: var(--tile-4-text); }
+.t-8 { background-color: var(--tile-8); color: var(--tile-8-text); }
+.t-16 { background-color: var(--tile-16); color: var(--tile-16-text); }
+.t-32 { background-color: var(--tile-32); color: var(--tile-32-text); }
+.t-2048 {
+  width: 100px;
+  height: 100px;
+  font-size: 1.6rem;
+  background-color: var(--tile-2048);
+  color: var(--tile-2048-text);
+}
+
+.visual-match-preview,
+.visual-merge-preview,
+.visual-chain-preview,
+.visual-2048-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.plus-sign, .arrow-sign, .arrow-sm {
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.tutorial-footer {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.btn-full {
+  width: 100%;
+}

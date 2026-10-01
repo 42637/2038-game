@@ -1,0 +1,224 @@
+.sub-screen {
+  display: flex;
+  flex-direction: column;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.sub-header h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+}
+
+.sub-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sub-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Tab Bar */
+.scores-tab-bar {
+  display: flex;
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 6px;
+}
+
+.scores-tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scores-tab-btn.active {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Online Mode Selector Pills */
+.online-mode-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.online-mode-pill {
+  padding: 6px 10px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.online-mode-pill.active {
+  background-color: var(--accent-secondary);
+  color: #ffffff;
+  border-color: var(--accent-secondary);
+}
+
+/* Leaderboard Table */
+.leaderboard-table {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.table-header-row {
+  display: grid;
+  grid-template-columns: 30px 1fr 90px 60px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.table-data-row {
+  display: grid;
+  grid-template-columns: 30px 1fr 90px 60px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  align-items: center;
+  padding: 6px 0;
+}
+
+.table-data-row:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.rank-col {
+  font-weight: 800;
+  color: var(--accent-gold);
+}
+
+.score-col {
+  font-weight: 800;
+}
+
+.tile-col {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.online-loading,
+.online-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.record-card {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.record-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.record-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+}
+
+.classic-bg { background-color: var(--accent-primary); }
+.endless-bg { background-color: var(--accent-secondary); }
+.timeattack-bg { background-color: var(--accent-gold); }
+.challenge-bg { background-color: #D97706; }
+.hardcore-bg { background-color: var(--accent-danger); }
+.mega-bg { background-color: #059669; }
+.bomb-bg { background-color: #DC2626; }
+.ice-bg { background-color: #0284C7; }
+.daily-bg { background-color: #7C3AED; }
+
+.record-mode-title {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+}
+
+.record-stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.record-stat-box {
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.record-stat-lbl {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+}
+
+.record-stat-num {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+}

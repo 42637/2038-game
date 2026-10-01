@@ -1,0 +1,207 @@
+.daily-screen {
+  gap: 14px;
+}
+
+.daily-banner-card {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.daily-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--bg-primary);
+  color: var(--accent-primary);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.daily-challenge-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-top: 4px;
+}
+
+.daily-challenge-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Streak Stats Card */
+.streak-stats-card {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: var(--shadow-sm);
+}
+
+.streak-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.streak-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flame-icon.current { color: #F59E0B; }
+.trophy-icon { color: var(--accent-gold); }
+
+.streak-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.streak-val {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.streak-lbl {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+}
+
+.streak-divider {
+  width: 1px;
+  height: 32px;
+  background-color: var(--bg-surface-hover);
+}
+
+/* 7-Day History Calendar */
+.daily-history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-subtitle {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+  padding-left: 2px;
+}
+
+.history-pills-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.history-pill {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  padding: 8px 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid transparent;
+}
+
+.history-pill.is-today {
+  border-color: var(--accent-primary);
+}
+
+.history-pill-day {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.pill-icon.done { color: var(--accent-success); }
+.pill-icon.today-dot { color: var(--accent-primary); font-size: 1.2rem; line-height: 1; }
+.pill-icon.empty-dash { color: var(--text-muted); font-size: 0.8rem; }
+
+/* Daily Action Card */
+.daily-action-card {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.completed-badge-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 8px;
+}
+
+.completed-big-icon {
+  color: var(--accent-success);
+}
+
+.completed-badge-box h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent-success);
+}
+
+.completed-badge-box p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.objective-detail-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px;
+}
+
+.obj-lbl {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+}
+
+.obj-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+}
+
+.obj-sub {
+  font-size: 0.82rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.play-daily-btn {
+  padding: 14px;
+  font-size: 0.95rem;
+}

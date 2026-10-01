@@ -1,0 +1,635 @@
+.board-wrapper {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-board {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-board);
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  position: relative;
+  touch-action: none;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15), var(--shadow-md);
+  user-select: none;
+  cursor: grab;
+  transform: translateZ(0);
+  /* Hardware accelerated compositor layer */
+  will-change: transform;
+}
+
+.game-board:active {
+  cursor: grabbing;
+}
+
+.board-disabled {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Background Cell Grid */
+.grid-background {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.grid-size-5 .grid-background {
+  gap: 8px;
+}
+
+.grid-size-6 .grid-background {
+  gap: 6px;
+}
+
+.grid-cell {
+  background-color: var(--bg-cell);
+  border-radius: var(--radius-sm);
+  width: 100%;
+  height: 100%;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Bomb Blast Target Highlight on Grid Cells */
+.cell-bomb-target {
+  border: 2px dashed #F97316;
+  background-color: rgba(249, 115, 22, 0.15);
+  animation: bomb-target-pulse 1.4s infinite ease-in-out;
+}
+
+@keyframes bomb-target-pulse {
+
+  0%,
+  100% {
+    border-color: rgba(249, 115, 22, 0.5);
+    background-color: rgba(249, 115, 22, 0.1);
+  }
+
+  50% {
+    border-color: rgba(239, 68, 68, 0.9);
+    background-color: rgba(239, 68, 68, 0.22);
+  }
+}
+
+/* Dynamic Tiles Container */
+.tiles-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  pointer-events: none;
+}
+
+.grid-size-5 .tiles-container {
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+}
+
+.grid-size-6 .tiles-container {
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+}
+
+/* Outer Tile Wrapper - Percentage Grid Positioning & GPU Accelerated Smooth Sliding */
+.tile-wrapper {
+  position: absolute;
+  padding: 0;
+  transition: top 0.15s cubic-bezier(0.25, 1, 0.5, 1), left 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: top, left, transform;
+  transform: translateZ(0);
+}
+
+.grid-size-5 .tile-wrapper {
+  padding: 0;
+}
+
+.grid-size-6 .tile-wrapper {
+  padding: 0;
+}
+
+/* Inner Tile Element - 3D Glassmorphism Bevel Depth & High-Contrast Typography */
+.tile-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22), inset 0 2px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+  transition: background-color 0.12s ease, transform 0.12s ease;
+  transform: translateZ(0);
+}
+
+/* Font Sizing Helpers for 4x4 */
+.text-xl {
+  font-size: 2.1rem;
+}
+
+.text-lg {
+  font-size: 1.8rem;
+}
+
+.text-md {
+  font-size: 1.45rem;
+}
+
+.text-sm {
+  font-size: 1.15rem;
+}
+
+/* Font Sizing Helpers for 5x5 */
+.text-grid5-lg {
+  font-size: 1.55rem;
+}
+
+.text-grid5-md {
+  font-size: 1.25rem;
+}
+
+.text-grid5-sm {
+  font-size: 1.0rem;
+}
+
+/* Font Sizing Helpers for 6x6 */
+.text-grid6-lg {
+  font-size: 1.25rem;
+}
+
+.text-grid6-md {
+  font-size: 1.05rem;
+}
+
+.text-grid6-sm {
+  font-size: 0.85rem;
+}
+
+/* Distinct High-Contrast 3D Tile Colors & Neon Halos */
+.tile-val-2 {
+  background-color: var(--tile-2);
+  color: var(--tile-2-text);
+}
+
+.tile-val-4 {
+  background-color: var(--tile-4);
+  color: var(--tile-4-text);
+}
+
+.tile-val-8 {
+  background-color: var(--tile-8);
+  color: var(--tile-8-text);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.tile-val-16 {
+  background-color: var(--tile-16);
+  color: var(--tile-16-text);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.tile-val-32 {
+  background-color: var(--tile-32);
+  color: var(--tile-32-text);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.tile-val-64 {
+  background-color: var(--tile-64);
+  color: var(--tile-64-text);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.tile-val-128 {
+  background-color: var(--tile-128);
+  color: var(--tile-128-text);
+  box-shadow: 0 0 16px rgba(234, 179, 8, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.tile-val-256 {
+  background-color: var(--tile-256);
+  color: var(--tile-256-text);
+  box-shadow: 0 0 18px rgba(217, 119, 6, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.tile-val-512 {
+  background-color: var(--tile-512);
+  color: var(--tile-512-text);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.tile-val-1024 {
+  background-color: var(--tile-1024);
+  color: var(--tile-1024-text);
+  box-shadow: 0 0 22px rgba(59, 130, 246, 0.65), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.tile-val-2048 {
+  background-color: var(--tile-2048);
+  color: var(--tile-2048-text);
+  box-shadow: 0 0 26px rgba(245, 158, 11, 0.8), inset 0 2px 0 rgba(255, 255, 255, 0.6);
+  animation: goldHaloPulse 1.8s infinite alternate;
+}
+
+@keyframes goldHaloPulse {
+  0% {
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.6);
+  }
+
+  100% {
+    box-shadow: 0 0 32px rgba(245, 158, 11, 0.95);
+  }
+}
+
+.tile-val-4096 {
+  background-color: var(--tile-4096);
+  color: var(--tile-4096-text);
+  box-shadow: 0 0 28px rgba(139, 92, 246, 0.75), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.tile-val-8192 {
+  background-color: var(--tile-8192);
+  color: var(--tile-8192-text);
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.tile-val-super {
+  background-color: var(--tile-super);
+  color: var(--tile-super-text);
+  box-shadow: 0 0 32px rgba(16, 185, 129, 0.85);
+}
+
+.tile-special-bomb {
+  background-color: #111827;
+  color: #EF4444;
+  border: 2px solid #EF4444;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.6), inset 0 0 8px rgba(239, 68, 68, 0.3);
+}
+
+.bomb-tile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bomb-icon {
+  color: #EF4444;
+  filter: drop-shadow(0 0 4px #EF4444);
+  animation: bomb-pulse 1.0s infinite ease-in-out;
+}
+
+@keyframes bomb-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.bomb-fuse-timer {
+  font-size: 0.58rem;
+  font-weight: 900;
+  color: #FBBF24;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 1px 5px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.bomb-fuse-timer.fuse-danger {
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.3);
+  border: 1px solid #EF4444;
+  animation: fuse-danger-pulse 0.5s infinite alternate;
+}
+
+@keyframes fuse-danger-pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.tile-frozen {
+  border: 2px solid #38BDF8;
+  position: relative;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+/* Pure CSS gradient overlay WITHOUT backdrop-filter to guarantee 60 FPS mobile speed */
+.tile-frozen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(224, 242, 254, 0.35) 0%, rgba(56, 189, 248, 0.2) 100%);
+  pointer-events: none;
+}
+
+.ice-overlay-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: rgba(15, 23, 42, 0.9);
+  color: #38BDF8;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.ice-badge-icon {
+  color: #38BDF8;
+}
+
+.bomb-fuse-spark {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  color: #F59E0B;
+  animation: fuse-flicker 0.4s infinite alternate;
+}
+
+@keyframes fuse-flicker {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.8) rotate(-10deg);
+    color: #EF4444;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.3) rotate(15deg);
+    color: #FBBF24;
+  }
+}
+
+/* Screen Shake Animation during Explosions */
+.board-shaking {
+  animation: board-screen-shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes board-screen-shake {
+
+  10%,
+  90% {
+    transform: translate3d(-3px, 1px, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(4px, -2px, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-5px, 3px, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(5px, -3px, 0);
+  }
+}
+
+/* Explosion Blast Waves & Fire Particle Layer */
+.explosion-blast-cell {
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blast-flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-sm);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(249, 115, 22, 0.8) 50%, rgba(220, 38, 38, 0.6) 100%);
+  animation: blast-flash-anim 0.5s ease-out forwards;
+}
+
+@keyframes blast-flash-anim {
+  0% {
+    opacity: 1;
+    transform: scale(0.4);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+.blast-ring {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  right: -20%;
+  bottom: -20%;
+  border-radius: 50%;
+  border: 3px solid #EF4444;
+  box-shadow: 0 0 20px #F97316;
+  animation: blast-ring-expand 0.55s ease-out forwards;
+}
+
+@keyframes blast-ring-expand {
+  0% {
+    opacity: 1;
+    transform: scale(0.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+.blast-center-bomb .blast-ring {
+  border-width: 5px;
+  border-color: #FBBF24;
+}
+
+.blast-particles {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.blast-particles span {
+  position: absolute;
+  animation: particle-fly 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.blast-particles .p1 {
+  animation-delay: 0.02s;
+}
+
+.blast-particles .p2 {
+  animation-delay: 0.05s;
+}
+
+.blast-particles .p3 {
+  animation-delay: 0.08s;
+}
+
+@keyframes particle-fly {
+  0% {
+    opacity: 1;
+    transform: scale(0.5) translate(0, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.5) translate(calc(var(--rand-x, 15px) * 1.5), calc(var(--rand-y, -20px) * 1.5));
+  }
+}
+
+/* Floating Score Badge Animation (+Score popup over cell) */
+.floating-score-item {
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.35rem;
+  color: #FBBF24;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6), 0 0 10px rgba(245, 158, 11, 0.8);
+  z-index: 50;
+  animation: floatScoreUp 0.85s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes floatScoreUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(0.7);
+  }
+
+  40% {
+    opacity: 1;
+    transform: translateY(-22px) scale(1.25);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-48px) scale(1);
+  }
+}
+
+/* Hammer Target Mode */
+.hammer-mode-active .game-board {
+  border: 3px dashed #EF4444;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+.hammer-targetable {
+  animation: hammerPulse 1.0s infinite alternate;
+}
+
+@keyframes hammerPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.95);
+  }
+}
+
+.hammer-targetable:hover .tile-inner {
+  border: 2px solid #EF4444;
+  box-shadow: 0 0 14px #EF4444;
+}
+
+/* Mobile Viewport Scaler */
+@media (max-width: 380px) {
+  .text-xl {
+    font-size: 1.7rem;
+  }
+
+  .text-lg {
+    font-size: 1.4rem;
+  }
+
+  .text-md {
+    font-size: 1.2rem;
+  }
+
+  .text-sm {
+    font-size: 0.95rem;
+  }
+
+  .text-grid5-lg {
+    font-size: 1.3rem;
+  }
+
+  .text-grid5-md {
+    font-size: 1.05rem;
+  }
+
+  .text-grid5-sm {
+    font-size: 0.85rem;
+  }
+
+  .text-grid6-lg {
+    font-size: 1.05rem;
+  }
+
+  .text-grid6-md {
+    font-size: 0.9rem;
+  }
+
+  .text-grid6-sm {
+    font-size: 0.75rem;
+  }
+
+  .bomb-trigger-hint {
+    font-size: 0.45rem;
+  }
+}

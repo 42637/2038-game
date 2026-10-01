@@ -1,0 +1,182 @@
+.game-header {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 12px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-surface);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+.mode-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+}
+
+.mode-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pause-btn,
+.theme-btn,
+.restart-btn {
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease;
+}
+
+.pause-btn:active,
+.theme-btn:active,
+.restart-btn:active {
+  transform: scale(0.92);
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stats-row:has(.timer-card) {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-card {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+}
+
+.stat-value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.timer-card {
+  background-color: var(--accent-primary);
+  color: var(--text-light);
+}
+
+.timer-card .stat-label,
+.timer-card .stat-value {
+  color: var(--text-light);
+}
+
+.timer-warning {
+  background-color: var(--accent-danger);
+  animation: timerPulse 0.8s infinite alternate;
+}
+
+/* Moves Challenge Header Extensions */
+.text-accent-target {
+  color: var(--accent-primary) !important;
+}
+
+.moves-warning {
+  background-color: #FEF3C7 !important;
+}
+
+.moves-warning .stat-label,
+.moves-warning .stat-value {
+  color: #D97706 !important;
+}
+
+.moves-danger {
+  background-color: var(--accent-danger) !important;
+}
+
+.moves-danger .stat-label,
+.moves-danger .stat-value {
+  color: var(--text-light) !important;
+  animation: timerPulse 0.8s infinite alternate;
+}
+
+@keyframes timerPulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0.85;
+    transform: scale(1.03);
+  }
+}
+
+.mode-hint-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.bomb-hint-bar {
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #EF4444;
+}
+
+.ice-hint-bar {
+  background-color: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: var(--accent-primary);
+}
+
+.hint-icon {
+  flex-shrink: 0;
+}
+
+@media (max-width: 380px) {
+  .stat-value {
+    font-size: 0.95rem;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+  }
+
+  .mode-hint-bar {
+    font-size: 0.7rem;
+  }
+}
