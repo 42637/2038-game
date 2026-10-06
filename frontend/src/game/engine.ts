@@ -222,7 +222,7 @@ export const moveBoard = (board: BoardMatrix, direction: Direction, size: number
           }
 
           const mergedTile: Tile = {
-            id: generateTileId(),
+            id: current.tile.id,
             value: mergedValue,
             row: 0,
             col: 0,

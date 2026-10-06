@@ -19,38 +19,38 @@
   --accent-success: #10B981;
   --accent-danger: #EF4444;
 
-  /* Tile Colors */
-  --tile-2: #E9DFD8;
-  --tile-2-text: #4A3E3D;
+  /* Distinct High-Contrast Tile Colors for CLASSIC Theme */
+  --tile-2: #EEE4DA;
+  --tile-2-text: #776E65;
 
-  --tile-4: #ECE0C0;
-  --tile-4-text: #4A3E3D;
+  --tile-4: #EDE0C8;
+  --tile-4-text: #776E65;
 
-  --tile-8: #F59E0B;
+  --tile-8: #F2B179;
   --tile-8-text: #FFFFFF;
 
-  --tile-16: #F97316;
+  --tile-16: #F59563;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #EF4444;
+  --tile-32: #F67C5F;
   --tile-32-text: #FFFFFF;
 
-  --tile-64: #DC2626;
+  --tile-64: #E64C2E;
   --tile-64-text: #FFFFFF;
 
-  --tile-128: #EAB308;
+  --tile-128: #EDCF72;
   --tile-128-text: #FFFFFF;
 
-  --tile-256: #D97706;
+  --tile-256: #00B4D8;
   --tile-256-text: #FFFFFF;
 
   --tile-512: #10B981;
   --tile-512-text: #FFFFFF;
 
-  --tile-1024: #3B82F6;
+  --tile-1024: #6366F1;
   --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #F59E0B;
+  --tile-2048: #D946EF;
   --tile-2048-text: #FFFFFF;
 
   --tile-4096: #8B5CF6;
@@ -59,8 +59,8 @@
   --tile-8192: #EC4899;
   --tile-8192-text: #FFFFFF;
 
-  --tile-super: #065F46;
-  --tile-super-text: #FFFFFF;
+  --tile-super: #FFD700;
+  --tile-super-text: #1E293B;
 
   /* Radius & Shadows */
   --radius-sm: 10px;
@@ -76,7 +76,7 @@
   --font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
-/* ICE FROST THEME - Crisp Royal Glacier Snow Aesthetic */
+/* ICE FROST THEME - Crisp Royal Glacier Snow & Aurora Palette */
 [data-theme="ice"] {
   --bg-primary: #EBF5FF;
   --bg-surface: #D8ECFD;
@@ -95,54 +95,55 @@
   --accent-success: #059669;
   --accent-danger: #DC2626;
 
-  --tile-2: #EEF6FF;
-  --tile-2-text: #0F3866;
+  /* Distinct High-Contrast Tile Colors for ICE Theme */
+  --tile-2: #E0F2FE;
+  --tile-2-text: #0369A1;
 
-  --tile-4: #D0E7FF;
-  --tile-4-text: #0F3866;
+  --tile-4: #BAE6FD;
+  --tile-4-text: #0284C7;
 
-  --tile-8: #3B82F6;
-  --tile-8-text: #FFFFFF;
+  --tile-8: #38BDF8;
+  --tile-8-text: #0F172A;
 
-  --tile-16: #2563EB;
+  --tile-16: #00A8E8;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #1D4ED8;
+  --tile-32: #06B6D4;
   --tile-32-text: #FFFFFF;
 
-  --tile-64: #1E40AF;
+  --tile-64: #0D9488;
   --tile-64-text: #FFFFFF;
 
-  --tile-128: #0284C7;
+  --tile-128: #6366F1;
   --tile-128-text: #FFFFFF;
 
-  --tile-256: #0369A1;
+  --tile-256: #8B5CF6;
   --tile-256-text: #FFFFFF;
 
-  --tile-512: #0891B2;
+  --tile-512: #D946EF;
   --tile-512-text: #FFFFFF;
 
-  --tile-1024: #0D9488;
+  --tile-1024: #F43F5E;
   --tile-1024-text: #FFFFFF;
 
   --tile-2048: #F59E0B;
   --tile-2048-text: #FFFFFF;
 
-  --tile-4096: #7C3AED;
+  --tile-4096: #10B981;
   --tile-4096-text: #FFFFFF;
 
-  --tile-8192: #DB2777;
+  --tile-8192: #3B82F6;
   --tile-8192-text: #FFFFFF;
 
-  --tile-super: #059669;
-  --tile-super-text: #FFFFFF;
+  --tile-super: #7DD3FC;
+  --tile-super-text: #0C4A6E;
 
   --shadow-sm: 0 2px 6px rgba(15, 56, 102, 0.1);
   --shadow-md: 0 6px 16px rgba(15, 56, 102, 0.15);
   --shadow-lg: 0 12px 32px rgba(15, 56, 102, 0.2);
 }
 
-/* DARK OBSIDIAN THEME */
+/* DARK OBSIDIAN THEME - High-Energy Neon Glow on Dark Slate */
 [data-theme="dark"] {
   --bg-primary: #0F172A;
   --bg-surface: #1E293B;
@@ -161,54 +162,55 @@
   --accent-success: #10B981;
   --accent-danger: #EF4444;
 
-  --tile-2: #334155;
+  /* Distinct High-Contrast Tile Colors for DARK Theme */
+  --tile-2: #1E293B;
   --tile-2-text: #F8FAFC;
 
-  --tile-4: #475569;
+  --tile-4: #334155;
   --tile-4-text: #F8FAFC;
 
-  --tile-8: #F59E0B;
+  --tile-8: #F97316;
   --tile-8-text: #FFFFFF;
 
-  --tile-16: #F97316;
+  --tile-16: #EF4444;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #EF4444;
+  --tile-32: #10B981;
   --tile-32-text: #FFFFFF;
 
-  --tile-64: #DC2626;
+  --tile-64: #06B6D4;
   --tile-64-text: #FFFFFF;
 
-  --tile-128: #EAB308;
+  --tile-128: #6366F1;
   --tile-128-text: #FFFFFF;
 
-  --tile-256: #D97706;
+  --tile-256: #A855F7;
   --tile-256-text: #FFFFFF;
 
-  --tile-512: #10B981;
+  --tile-512: #EC4899;
   --tile-512-text: #FFFFFF;
 
-  --tile-1024: #3B82F6;
+  --tile-1024: #F59E0B;
   --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #F59E0B;
+  --tile-2048: #14B8A6;
   --tile-2048-text: #FFFFFF;
 
-  --tile-4096: #8B5CF6;
+  --tile-4096: #E11D48;
   --tile-4096-text: #FFFFFF;
 
-  --tile-8192: #EC4899;
-  --tile-8192-text: #FFFFFF;
+  --tile-8192: #84CC16;
+  --tile-8192-text: #1E293B;
 
-  --tile-super: #065F46;
-  --tile-super-text: #FFFFFF;
+  --tile-super: #FACC15;
+  --tile-super-text: #0F172A;
 
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
 }
 
-/* CYBER NEON THEME */
+/* CYBER NEON THEME - Cyberpunk Synthwave Electric Palette */
 [data-theme="cyber"] {
   --bg-primary: #180828;
   --bg-surface: #2D124D;
@@ -227,54 +229,55 @@
   --accent-success: #34D399;
   --accent-danger: #F43F5E;
 
-  --tile-2: #3B0764;
-  --tile-2-text: #F472B6;
+  /* Distinct High-Contrast Tile Colors for CYBER Theme */
+  --tile-2: #2E1065;
+  --tile-2-text: #FFFFFF;
 
-  --tile-4: #581C87;
-  --tile-4-text: #F472B6;
+  --tile-4: #3B0764;
+  --tile-4-text: #FFFFFF;
 
-  --tile-8: #9333EA;
+  --tile-8: #EC4899;
   --tile-8-text: #FFFFFF;
 
-  --tile-16: #C084FC;
+  --tile-16: #F43F5E;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #E879F9;
-  --tile-32-text: #FFFFFF;
+  --tile-32: #F59E0B;
+  --tile-32-text: #180828;
 
-  --tile-64: #F43F5E;
-  --tile-64-text: #FFFFFF;
+  --tile-64: #10B981;
+  --tile-64-text: #180828;
 
-  --tile-128: #FBBF24;
+  --tile-128: #06B6D4;
   --tile-128-text: #180828;
 
-  --tile-256: #F472B6;
+  --tile-256: #8B5CF6;
   --tile-256-text: #FFFFFF;
 
-  --tile-512: #34D399;
-  --tile-512-text: #180828;
+  --tile-512: #E0E7FF;
+  --tile-512-text: #312E81;
 
-  --tile-1024: #38BDF8;
-  --tile-1024-text: #180828;
+  --tile-1024: #D946EF;
+  --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #EC4899;
-  --tile-2048-text: #FFFFFF;
+  --tile-2048: #A3E635;
+  --tile-2048-text: #14532D;
 
-  --tile-4096: #A855F7;
-  --tile-4096-text: #FFFFFF;
+  --tile-4096: #38BDF8;
+  --tile-4096-text: #0C4A6E;
 
   --tile-8192: #FB7185;
   --tile-8192-text: #FFFFFF;
 
-  --tile-super: #10B981;
-  --tile-super-text: #FFFFFF;
+  --tile-super: #FDE047;
+  --tile-super-text: #180828;
 
   --shadow-sm: 0 2px 4px rgba(236, 72, 153, 0.2);
   --shadow-md: 0 6px 16px rgba(236, 72, 153, 0.3);
   --shadow-lg: 0 12px 32px rgba(236, 72, 153, 0.4);
 }
 
-/* SUNSET GOLD THEME */
+/* SUNSET GOLD THEME - Twilight Dusk to Solstice Spectrum */
 [data-theme="sunset"] {
   --bg-primary: #1F1924;
   --bg-surface: #2E2336;
@@ -293,47 +296,48 @@
   --accent-success: #10B981;
   --accent-danger: #EF4444;
 
-  --tile-2: #43274D;
-  --tile-2-text: #FFEDD5;
+  /* Distinct High-Contrast Tile Colors for SUNSET Theme */
+  --tile-2: #3A233D;
+  --tile-2-text: #FED7AA;
 
-  --tile-4: #5C3266;
+  --tile-4: #502B49;
   --tile-4-text: #FFEDD5;
 
-  --tile-8: #9A3412;
+  --tile-8: #C2410C;
   --tile-8-text: #FFFFFF;
 
-  --tile-16: #C2410C;
+  --tile-16: #EA580C;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #EA580C;
+  --tile-32: #E11D48;
   --tile-32-text: #FFFFFF;
 
-  --tile-64: #F97316;
+  --tile-64: #D946EF;
   --tile-64-text: #FFFFFF;
 
-  --tile-128: #FB923C;
+  --tile-128: #F59E0B;
   --tile-128-text: #FFFFFF;
 
-  --tile-256: #F59E0B;
-  --tile-256-text: #FFFFFF;
+  --tile-256: #84CC16;
+  --tile-256-text: #1E293B;
 
-  --tile-512: #FBBF24;
-  --tile-512-text: #1F1924;
+  --tile-512: #06B6D4;
+  --tile-512-text: #FFFFFF;
 
-  --tile-1024: #FACC15;
-  --tile-1024-text: #1F1924;
+  --tile-1024: #8B5CF6;
+  --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #F59E0B;
+  --tile-2048: #F43F5E;
   --tile-2048-text: #FFFFFF;
 
-  --tile-4096: #E11D48;
-  --tile-4096-text: #FFFFFF;
+  --tile-4096: #FBBF24;
+  --tile-4096-text: #1F1924;
 
-  --tile-8192: #BE185D;
+  --tile-8192: #10B981;
   --tile-8192-text: #FFFFFF;
 
-  --tile-super: #047857;
-  --tile-super-text: #FFFFFF;
+  --tile-super: #FACC15;
+  --tile-super-text: #1F1924;
 
   --shadow-sm: 0 2px 4px rgba(249, 115, 22, 0.2);
   --shadow-md: 0 6px 16px rgba(249, 115, 22, 0.3);

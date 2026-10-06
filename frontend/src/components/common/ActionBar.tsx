@@ -36,21 +36,24 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         onClick={onUndo}
         disabled={!canUndo || disabled}
         title="Undo last move"
+        aria-label="Undo last move"
       >
-        <RotateCcw size={18} />
-        <span>UNDO</span>
+        <RotateCcw className="action-icon" size={16} />
+        <span className="action-text">UNDO</span>
         <span className="action-badge">{undoCount}</span>
       </button>
 
       <button
-        className={`action-btn ${isHammerActive ? 'action-btn-active' : ''} ${hammerCount <= 0 ? 'action-btn-disabled' : ''
-          }`}
+        className={`action-btn ${isHammerActive ? 'action-btn-hammer-active' : ''} ${
+          hammerCount <= 0 ? 'action-btn-disabled' : ''
+        }`}
         onClick={onToggleHammer}
         disabled={hammerCount <= 0 || disabled}
-        title="Hammer: Destroy 1 tile"
+        title={isHammerActive ? 'Cancel Hammer' : 'Hammer: Destroy 1 tile'}
+        aria-label="Hammer tile"
       >
-        <Hammer size={18} />
-        <span>HAMMER</span>
+        <Hammer className="action-icon" size={16} />
+        <span className="action-text">{isHammerActive ? 'CANCEL' : 'HAMMER'}</span>
         <span className="action-badge">{hammerCount}</span>
       </button>
 
@@ -59,9 +62,10 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         onClick={onShuffle}
         disabled={shuffleCount <= 0 || disabled}
         title="Shuffle: Rearrange tiles"
+        aria-label="Shuffle board"
       >
-        <Shuffle size={18} />
-        <span>SHUFFLE</span>
+        <Shuffle className="action-icon" size={16} />
+        <span className="action-text">SHUFFLE</span>
         <span className="action-badge">{shuffleCount}</span>
       </button>
 
@@ -69,10 +73,12 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         className={`action-btn ${showDPad ? 'action-btn-active' : ''}`}
         onClick={onToggleDPad}
         title="Toggle Touch Controls D-Pad"
+        aria-label="Toggle D-Pad controls"
       >
-        <Gamepad2 size={18} />
-        <span>D-PAD</span>
+        <Gamepad2 className="action-icon" size={16} />
+        <span className="action-text">D-PAD</span>
       </button>
     </div>
   );
 };
+

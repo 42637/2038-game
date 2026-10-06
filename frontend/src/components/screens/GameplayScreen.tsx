@@ -658,26 +658,45 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
   };
 
   const handleToggleHammer = () => {
+    const count = gameState.powerups?.hammer || 0;
+    if (count <= 0) return;
     setIsHammerActive((prev) => !prev);
   };
 
   const handleHammerTile = (r: number, c: number) => {
-    setGameState((prev) => {
-      const currentHammer = prev.powerups?.hammer || 0;
-      if (currentHammer <= 0 || !prev.board[r]?.[c]) return prev;
-      const newBoard = hammerTile(prev.board, r, c);
-      audioService.playHammerSound(settings.soundEnabled);
-      triggerHaptic(hapticPatterns.bomb, settings.vibrationEnabled);
-      setIsHammerActive(false);
-      return {
-        ...prev,
-        board: newBoard,
-        powerups: {
-          ...prev.powerups!,
-          hammer: currentHammer - 1,
-        },
-      };
+    const currentHammer = gameState.powerups?.hammer || 0;
+    if (currentHammer <= 0 || !gameState.board[r]?.[c]) return;
+
+    // Snapshot board state before smashing for undo history
+    const currentStateSnapshot = {
+      board: cloneBoard(gameState.board),
+      score: gameState.score,
+      moves: gameState.moves,
+      highestTile: gameState.highestTile,
+    };
+
+    const newBoard = hammerTile(gameState.board, r, c);
+    audioService.playHammerSound(settings.soundEnabled);
+    triggerHaptic(hapticPatterns.bomb, settings.vibrationEnabled);
+
+    // Trigger visual explosion blast particle effect on target cell
+    setActiveExplosions({
+      bombPositions: [{ row: r, col: c }],
+      cellPositions: [{ row: r, col: c }],
     });
+    setTimeout(() => setActiveExplosions(null), 450);
+
+    setIsHammerActive(false);
+
+    setGameState((prev) => ({
+      ...prev,
+      board: newBoard,
+      undoStack: [currentStateSnapshot, ...(prev.undoStack || []).slice(0, 9)],
+      powerups: {
+        ...prev.powerups!,
+        hammer: Math.max(0, currentHammer - 1),
+      },
+    }));
   };
 
   const handleShuffle = () => {
@@ -820,6 +839,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
         floatingScores={floatingScores}
         isHammerActive={isHammerActive}
         onHammerTile={handleHammerTile}
+        onToggleHammer={handleToggleHammer}
         explosions={activeExplosions}
         disabled={
           gameState.isPaused ||

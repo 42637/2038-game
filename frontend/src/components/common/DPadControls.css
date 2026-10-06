@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 8px auto 4px auto;
+  margin: 6px auto 2px auto;
   user-select: none;
 }
 
@@ -13,15 +13,24 @@
 
 .dpad-grid {
   display: grid;
-  grid-template-columns: repeat(3, 44px);
-  grid-template-rows: repeat(3, 44px);
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(3, 40px);
   gap: 4px;
   align-items: center;
   justify-items: center;
   background: var(--bg-surface);
-  padding: 6px;
+  padding: 5px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 380px) {
+  .dpad-grid {
+    grid-template-columns: repeat(3, 34px);
+    grid-template-rows: repeat(3, 34px);
+    gap: 3px;
+    padding: 4px;
+  }
 }
 
 .dpad-btn {
@@ -58,8 +67,8 @@
 .dpad-center {
   grid-column: 2;
   grid-row: 2;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   background: var(--text-muted);
   border-radius: 50%;
   opacity: 0.3;
@@ -73,4 +82,4 @@
 .dpad-down {
   grid-column: 2;
   grid-row: 3;
-}
+}

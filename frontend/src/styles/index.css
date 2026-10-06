@@ -33,7 +33,7 @@ html, body {
 .app-container {
   width: 100%;
   height: 100%;
-  max-width: 480px; /* Mobile width constraint on desktop */
+  max-width: 520px; /* Enhanced mobile width constraint on desktop */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -51,10 +51,18 @@ html, body {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 16px 20px;
+  padding: 8px 10px;
   overflow-y: auto;
   position: relative;
+  box-sizing: border-box;
 }
+
+@media (max-width: 440px) {
+  .screen {
+    padding: 4px 6px;
+  }
+}
+
 
 /* Buttons System */
 .btn {

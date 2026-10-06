@@ -11,6 +11,7 @@ interface GameBoardProps {
   floatingScores?: { id: string; score: number; row: number; col: number }[];
   isHammerActive?: boolean;
   onHammerTile?: (row: number, col: number) => void;
+  onToggleHammer?: () => void;
   explosions?: {
     bombPositions: { row: number; col: number }[];
     cellPositions: { row: number; col: number }[];
@@ -25,6 +26,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   floatingScores = [],
   isHammerActive = false,
   onHammerTile,
+  onToggleHammer,
   explosions = null,
   disabled = false,
 }) => {
@@ -89,12 +91,30 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   const cellSizeCalc = `calc((100% - ${(gridSize - 1) * gap}px) / ${gridSize})`;
 
   return (
-    <div className={`board-wrapper ${explosions ? 'board-wrapper-exploding' : ''} ${isHammerActive ? 'hammer-mode-active' : ''}`}>
-      <div
-        ref={boardRef}
-        className={`game-board grid-size-${gridSize} ${disabled ? 'board-disabled' : ''} ${explosions ? 'board-shaking' : ''
-          }`}
-      >
+    <div className={`board-container-outer ${isHammerActive ? 'hammer-active-outer' : ''}`}>
+      {/* Active Hammer Mode Prompt Banner */}
+      {isHammerActive && (
+        <div className="hammer-mode-banner">
+          <div className="hammer-banner-content">
+            <span className="hammer-banner-icon">🔨</span>
+            <span className="hammer-banner-text">HAMMER ACTIVE: Tap any tile to smash it!</span>
+          </div>
+          <button
+            type="button"
+            className="hammer-cancel-btn"
+            onClick={() => onToggleHammer && onToggleHammer()}
+          >
+            CANCEL
+          </button>
+        </div>
+      )}
+
+      <div className={`board-wrapper ${explosions ? 'board-wrapper-exploding' : ''} ${isHammerActive ? 'hammer-mode-active' : ''}`}>
+        <div
+          ref={boardRef}
+          className={`game-board grid-size-${gridSize} ${disabled ? 'board-disabled' : ''} ${explosions ? 'board-shaking' : ''
+            }`}
+        >
         {/* N x N Background Cells with Bomb Blast Area Highlighting */}
         <div
           className="grid-background"
@@ -107,17 +127,32 @@ export const GameBoard: React.FC<GameBoardProps> = ({
             const r = Math.floor(idx / gridSize);
             const c = idx % gridSize;
             const isBombTarget = bombTargetCells.has(`${r}_${c}`);
+            const hasTile = !!board[r]?.[c];
             return (
               <div
                 key={`cell_${idx}`}
-                className={`grid-cell ${isBombTarget ? 'cell-bomb-target' : ''}`}
+                className={`grid-cell ${isBombTarget ? 'cell-bomb-target' : ''} ${
+                  isHammerActive && hasTile ? 'cell-hammer-targetable' : ''
+                }`}
+                onClick={(e) => {
+                  if (isHammerActive && hasTile && onHammerTile) {
+                    e.stopPropagation();
+                    onHammerTile(r, c);
+                  }
+                }}
+                onPointerDown={(e) => {
+                  if (isHammerActive && hasTile && onHammerTile) {
+                    e.stopPropagation();
+                    onHammerTile(r, c);
+                  }
+                }}
               />
             );
           })}
         </div>
 
         {/* Dynamic Animated Tile Layer */}
-        <div className="tiles-container">
+        <div className={`tiles-container ${isHammerActive ? 'tiles-container-hammer-active' : ''}`}>
           {tiles.map((tile) => {
             const colorClass = getTileColorClass(tile);
             const fontSizeClass = getFontSizeClass(tile.value);
@@ -127,10 +162,17 @@ export const GameBoard: React.FC<GameBoardProps> = ({
             const wrapperStyle: React.CSSProperties = {
               width: cellSizeCalc,
               height: cellSizeCalc,
-              top: `calc(${tile.row} * (100% + ${gap}px) / ${gridSize})`,
-              left: `calc(${tile.col} * (100% + ${gap}px) / ${gridSize})`,
+              transform: `translate3d(calc(${tile.col} * (100% + ${gap}px)), calc(${tile.row} * (100% + ${gap}px)), 0)`,
               pointerEvents: isHammerActive ? 'auto' : 'none',
               cursor: isHammerActive ? 'pointer' : 'default',
+            };
+
+            const handleTileSmash = (e: React.SyntheticEvent) => {
+              if (isHammerActive && onHammerTile) {
+                e.preventDefault();
+                e.stopPropagation();
+                onHammerTile(tile.row, tile.col);
+              }
             };
 
             return (
@@ -138,13 +180,16 @@ export const GameBoard: React.FC<GameBoardProps> = ({
                 key={tile.id}
                 className={`tile-wrapper ${isHammerActive ? 'hammer-targetable' : ''}`}
                 style={wrapperStyle}
-                onClick={() => {
-                  if (isHammerActive && onHammerTile) {
-                    onHammerTile(tile.row, tile.col);
-                  }
-                }}
+                onClick={handleTileSmash}
+                onPointerDown={handleTileSmash}
+                onTouchEnd={handleTileSmash}
               >
                 <div className={`tile-inner ${colorClass} ${fontSizeClass} ${animClass} ${iceClass}`}>
+                  {isHammerActive && (
+                    <div className="hammer-target-overlay">
+                      <span className="hammer-target-icon">🔨</span>
+                    </div>
+                  )}
                   {tile.specialType === 'BOMB' ? (
                     <div className="bomb-tile-content">
                       <Flame size={14} className="bomb-fuse-spark" />
@@ -171,10 +216,9 @@ export const GameBoard: React.FC<GameBoardProps> = ({
           {/* Floating Score Popups Layer */}
           {floatingScores.map((fs) => {
             const fsStyle: React.CSSProperties = {
-              top: `calc(${fs.row} * (100% + ${gap}px) / ${gridSize})`,
-              left: `calc(${fs.col} * (100% + ${gap}px) / ${gridSize})`,
               width: cellSizeCalc,
               height: cellSizeCalc,
+              transform: `translate3d(calc(${fs.col} * (100% + ${gap}px)), calc(${fs.row} * (100% + ${gap}px)), 0)`,
             };
 
             return (
@@ -190,8 +234,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
               const blastStyle: React.CSSProperties = {
                 width: cellSizeCalc,
                 height: cellSizeCalc,
-                top: `calc(${pos.row} * (100% + ${gap}px) / ${gridSize})`,
-                left: `calc(${pos.col} * (100% + ${gap}px) / ${gridSize})`,
+                transform: `translate3d(calc(${pos.col} * (100% + ${gap}px)), calc(${pos.row} * (100% + ${gap}px)), 0)`,
               };
 
               const isCenterBomb = explosions.bombPositions.some(
@@ -217,5 +260,6 @@ export const GameBoard: React.FC<GameBoardProps> = ({
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 };

@@ -1,12 +1,14 @@
 .action-bar-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  margin: 8px auto 4px auto;
+  gap: 8px;
+  margin: 4px auto 2px auto;
   width: 100%;
-  max-width: 420px;
-  padding: 0 4px;
+  max-width: 440px;
+  padding: 2px 4px;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .action-bar-disabled {
@@ -17,32 +19,40 @@
 .action-btn {
   flex: 1;
   min-width: 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 9px 4px;
-  border-radius: var(--radius-sm);
+  gap: 5px;
+  padding: 8px 4px;
+  height: 38px;
+  border-radius: var(--radius-sm, 10px);
   background-color: var(--bg-surface);
   color: var(--text-main);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   font-family: var(--font-family);
   font-weight: 800;
   font-size: 0.72rem;
   letter-spacing: 0.3px;
-  white-space: nowrap;
   cursor: pointer;
   position: relative;
   box-shadow: var(--shadow-sm);
   transition: all 0.15s ease;
+  box-sizing: border-box;
+  touch-action: manipulation;
+  overflow: visible;
 }
 
-.action-btn svg {
+.action-btn .action-icon {
   flex-shrink: 0;
+  width: 16px;
+  height: 16px;
 }
 
-.action-btn span {
+.action-btn .action-text {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
 }
 
 .action-btn:hover:not(:disabled) {
@@ -62,15 +72,31 @@
   animation: pulseActive 1.2s infinite ease-in-out;
 }
 
-@keyframes pulseActive {
+.action-btn-active .action-text,
+.action-btn-active .action-icon {
+  color: #ffffff !important;
+}
 
+.action-btn-hammer-active {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: #ffffff !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.75) !important;
+  animation: pulseActive 1.0s infinite ease-in-out;
+}
+
+.action-btn-hammer-active .action-text,
+.action-btn-hammer-active .action-icon {
+  color: #ffffff !important;
+}
+
+@keyframes pulseActive {
   0%,
   100% {
     transform: scale(1);
   }
-
   50% {
-    transform: scale(1.04);
+    transform: scale(1.03);
   }
 }
 
@@ -80,18 +106,109 @@
 }
 
 .action-badge {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  z-index: 5;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 17px;
-  height: 16px;
-  background: var(--accent-gold);
-  color: #000000;
+  min-width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
   border-radius: 999px;
   padding: 0 4px;
-  font-size: 0.62rem;
+  font-size: 0.65rem;
   font-weight: 900;
   line-height: 1;
-  margin-left: 2px;
-  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  border: 1.5px solid var(--bg-primary, #0f172a);
+  pointer-events: none;
+  box-sizing: border-box;
 }
+
+/* Responsive Breakpoints for Mobile Sizes */
+
+@media (max-width: 440px) {
+  .action-bar-container {
+    gap: 6px;
+    padding: 2px 4px;
+    margin: 6px auto 2px auto;
+  }
+
+  .action-btn {
+    height: 36px;
+    padding: 6px 3px;
+    gap: 3px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1px;
+  }
+
+  .action-btn .action-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .action-badge {
+    top: -5px;
+    right: -3px;
+    min-width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+    padding: 0 3px;
+  }
+}
+
+@media (max-width: 375px) {
+  .action-bar-container {
+    gap: 4px;
+  }
+
+  .action-btn {
+    height: 34px;
+    padding: 5px 2px;
+    gap: 2px;
+    font-size: 0.63rem;
+  }
+
+  .action-btn .action-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .action-badge {
+    top: -5px;
+    right: -3px;
+    min-width: 15px;
+    height: 15px;
+    font-size: 0.58rem;
+    border-width: 1px;
+  }
+}
+
+@media (max-width: 330px) {
+  .action-bar-container {
+    gap: 3px;
+  }
+
+  .action-btn {
+    height: 32px;
+    padding: 4px 1px;
+    font-size: 0.58rem;
+    letter-spacing: 0;
+  }
+
+  .action-btn .action-icon {
+    width: 13px;
+    height: 13px;
+  }
+
+  .action-badge {
+    top: -4px;
+    right: -2px;
+    min-width: 14px;
+    height: 14px;
+    font-size: 0.55rem;
+  }
+}
