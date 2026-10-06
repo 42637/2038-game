@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowLeft, ShieldCheck, Wifi, WifiOff, Code2 } from 'lucide-react';
-import { apiService, HealthResponse } from '../../services/api';
+import React from 'react';
+import { ArrowLeft, ShieldCheck, WifiOff, Code2 } from 'lucide-react';
 import './AboutScreen.css';
 
 interface AboutScreenProps {
@@ -8,22 +7,6 @@ interface AboutScreenProps {
 }
 
 export const AboutScreen: React.FC<AboutScreenProps> = ({ onBack }) => {
-  const [backendHealth, setBackendHealth] = useState<HealthResponse | null>(null);
-  const [checkingBackend, setCheckingBackend] = useState(true);
-
-  useEffect(() => {
-    let isMounted = true;
-    apiService.checkHealth().then((data) => {
-      if (isMounted) {
-        setBackendHealth(data);
-        setCheckingBackend(false);
-      }
-    });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return (
     <div className="screen sub-screen">
       <header className="sub-header">
@@ -64,23 +47,15 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ onBack }) => {
           </div>
         </div>
 
-        {/* Backend API Status Foundation */}
+        {/* Standalone System Status */}
         <div className="about-backend-card">
           <div className="backend-status-header">
-            {backendHealth ? (
-              <Wifi size={18} className="wifi-online" />
-            ) : (
-              <WifiOff size={18} className="wifi-offline" />
-            )}
-            <span className="backend-title">Backend API Status</span>
+            <WifiOff size={18} className="wifi-offline" />
+            <span className="backend-title">Standalone System Status</span>
           </div>
 
           <p className="backend-desc">
-            {checkingBackend
-              ? 'Checking optional backend connection...'
-              : backendHealth
-              ? `Connected to ${backendHealth.service}`
-              : 'Backend offline (Game runs 100% locally)'}
+            100% Offline Standalone Mode Active (Zero network calls)
           </p>
         </div>
       </div>

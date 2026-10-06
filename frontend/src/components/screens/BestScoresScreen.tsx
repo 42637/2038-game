@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   ArrowLeft,
   Play,
@@ -7,15 +7,13 @@ import {
   Target,
   ShieldAlert,
   Grid3X3,
-  Globe,
   UserCheck,
   Bomb,
   Snowflake,
   Calendar,
   Flame,
 } from 'lucide-react';
-import { GameMode, RecordsState } from '../../types/game';
-import { apiService, LeaderboardEntry } from '../../services/api';
+import { RecordsState } from '../../types/game';
 import './BestScoresScreen.css';
 
 interface BestScoresScreenProps {
@@ -24,21 +22,6 @@ interface BestScoresScreenProps {
 }
 
 export const BestScoresScreen: React.FC<BestScoresScreenProps> = ({ records, onBack }) => {
-  const [tab, setTab] = useState<'LOCAL' | 'ONLINE'>('LOCAL');
-  const [selectedOnlineMode, setSelectedOnlineMode] = useState<GameMode>('CLASSIC');
-  const [onlineEntries, setOnlineEntries] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (tab === 'ONLINE') {
-      setLoading(true);
-      apiService.getLeaderboard(selectedOnlineMode).then((entries) => {
-        setOnlineEntries(entries);
-        setLoading(false);
-      });
-    }
-  }, [tab, selectedOnlineMode]);
-
   return (
     <div className="screen sub-screen">
       <header className="sub-header">
@@ -50,25 +33,7 @@ export const BestScoresScreen: React.FC<BestScoresScreenProps> = ({ records, onB
       </header>
 
       <div className="sub-content">
-        {/* Tab Switcher */}
-        <div className="scores-tab-bar">
-          <button
-            className={`scores-tab-btn ${tab === 'LOCAL' ? 'active' : ''}`}
-            onClick={() => setTab('LOCAL')}
-          >
-            <UserCheck size={16} /> LOCAL RECORDS
-          </button>
-          <button
-            className={`scores-tab-btn ${tab === 'ONLINE' ? 'active' : ''}`}
-            onClick={() => setTab('ONLINE')}
-          >
-            <Globe size={16} /> ONLINE LEADERBOARD
-          </button>
-        </div>
-
-        {tab === 'LOCAL' ? (
-          <>
-            <p className="sub-desc">Your personal offline record leaderboards across all modes.</p>
+        <p className="sub-desc">Your personal offline record leaderboards across all modes.</p>
 
             <div className="records-list">
               {/* Classic Mode */}
@@ -268,57 +233,6 @@ export const BestScoresScreen: React.FC<BestScoresScreenProps> = ({ records, onB
                 </div>
               </div>
             </div>
-          </>
-        ) : (
-          <>
-            <div className="online-mode-selector">
-              {(
-                [
-                  'CLASSIC',
-                  'ENDLESS',
-                  'TIME_ATTACK',
-                  'MOVES_CHALLENGE',
-                  'HARDCORE',
-                  'MEGA_BOARD',
-                  'BOMB',
-                  'ICE',
-                  'DAILY_CHALLENGE',
-                ] as GameMode[]
-              ).map((m) => (
-                <button
-                  key={m}
-                  className={`online-mode-pill ${selectedOnlineMode === m ? 'active' : ''}`}
-                  onClick={() => setSelectedOnlineMode(m)}
-                >
-                  {m.replace('_', ' ')}
-                </button>
-              ))}
-            </div>
-
-            {loading ? (
-              <div className="online-loading">Loading live leaderboard...</div>
-            ) : onlineEntries.length === 0 ? (
-              <div className="online-empty">No scores recorded yet for this mode.</div>
-            ) : (
-              <div className="leaderboard-table">
-                <div className="table-header-row">
-                  <span>#</span>
-                  <span>PLAYER</span>
-                  <span>SCORE</span>
-                  <span>TILE</span>
-                </div>
-                {onlineEntries.map((entry, idx) => (
-                  <div key={entry.id || idx} className="table-data-row">
-                    <span className="rank-col">{idx + 1}</span>
-                    <span className="name-col">{entry.playerName}</span>
-                    <span className="score-col">{entry.score.toLocaleString()}</span>
-                    <span className="tile-col">{entry.highestTile}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </>
-        )}
       </div>
     </div>
   );

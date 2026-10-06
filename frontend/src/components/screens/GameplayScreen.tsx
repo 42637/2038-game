@@ -42,7 +42,6 @@ import { getTodayDateSeed } from '../../game/dailyChallengeGenerator';
 import { audioService } from '../../services/audio';
 import { hapticPatterns, triggerHaptic } from '../../services/haptics';
 import { gameStorage } from '../../utils/gameStorage';
-import { apiService } from '../../services/api';
 import './GameplayScreen.css';
 
 interface GameplayScreenProps {
@@ -378,14 +377,6 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
             audioService.playChallengeCompleteSound(settings.soundEnabled);
             triggerHaptic(hapticPatterns.challengeComplete, settings.vibrationEnabled);
 
-            apiService.submitScore({
-              mode: 'MOVES_CHALLENGE',
-              score: newScore,
-              highestTile: newHighestTile,
-              moves: newMoves,
-              challengeLevelId: challengeLevel?.id,
-            });
-
             if (challengeLevel) {
               const currentLvl = challengeLevel.levelNumber;
               const nextUnlocked = Math.max(records.movesChallenge.highestUnlockedLevel, currentLvl + 1);
@@ -552,13 +543,6 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
             };
           }
 
-          apiService.submitScore({
-            mode,
-            score: newScore,
-            highestTile: newHighestTile,
-            moves: newMoves,
-          });
-
           queueMicrotask(() => onUpdateRecords(updatedRecords));
         }
 
@@ -567,13 +551,6 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
         if (isOver && !challengeComplete && !challengeFailed) {
           audioService.playGameOverSound(settings.soundEnabled);
           triggerHaptic(hapticPatterns.gameOver, settings.vibrationEnabled);
-
-          apiService.submitScore({
-            mode,
-            score: newScore,
-            highestTile: newHighestTile,
-            moves: newMoves,
-          });
 
           const updatedStats: StatisticsState = {
             ...stats,
@@ -804,6 +781,12 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
 
   return (
     <div className="screen gameplay-screen">
+      {/* 4 Cozy Organic Background Corner Curves matching reference image */}
+      <div className="bg-corner bg-corner-tl" />
+      <div className="bg-corner bg-corner-tr" />
+      <div className="bg-corner bg-corner-bl" />
+      <div className="bg-corner bg-corner-br" />
+
       {/* Confetti Celebration Overlay */}
       {showConfetti && <ConfettiEffect durationMs={3000} onFinish={() => setShowConfetti(false)} />}
 
@@ -829,6 +812,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
         onCycleTheme={handleCycleTheme}
         onRestart={handleRequestRestart}
         onPause={handlePause}
+        onMainMenu={onMainMenu}
       />
 
       {/* Main Square Board */}

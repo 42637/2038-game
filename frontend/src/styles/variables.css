@@ -1,30 +1,31 @@
 :root, [data-theme="classic"], [data-theme="white"] {
-  /* Simple Crisp White Design System */
-  --bg-primary: #FFFFFF;
-  --bg-surface: #F3F4F6;
-  --bg-surface-hover: #E5E7EB;
-  --bg-board: #BBADA0;
-  --bg-cell: #CDC1B4;
+  /* Warm Cozy Cream Design System */
+  --bg-primary: #FAF5EE;
+  --bg-surface: #EDE4D8;
+  --bg-surface-hover: #E3D7C8;
+  --bg-board: #BCAB9B;
+  --bg-cell: #CDC0B3;
 
   /* Typography Colors */
-  --text-main: #111827;
-  --text-muted: #6B7280;
+  --text-main: #574A40;
+  --text-muted: #8C7C6D;
   --text-light: #FFFFFF;
 
   /* Accent Colors */
-  --accent-primary: #E07A5F;
-  --accent-primary-hover: #D0694E;
-  --accent-secondary: #374151;
+  --accent-primary: #C5A07B;
+  --accent-primary-hover: #B58F69;
+  --accent-secondary: #574A40;
   --accent-gold: #EDC22E;
   --accent-success: #10B981;
   --accent-danger: #EF4444;
+  --accent-badge: #FF8500;
 
   /* Distinct High-Contrast Tile Colors for CLASSIC Theme */
-  --tile-2: #EEE4DA;
-  --tile-2-text: #776E65;
+  --tile-2: #F5EEE6;
+  --tile-2-text: #574A40;
 
   --tile-4: #EDE0C8;
-  --tile-4-text: #776E65;
+  --tile-4-text: #574A40;
 
   --tile-8: #F2B179;
   --tile-8-text: #FFFFFF;
@@ -63,14 +64,14 @@
   --tile-super-text: #1E293B;
 
   /* Radius & Shadows */
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 2px 4px rgba(44, 52, 55, 0.06);
-  --shadow-md: 0 6px 16px rgba(44, 52, 55, 0.08);
-  --shadow-lg: 0 12px 32px rgba(44, 52, 55, 0.12);
+  --shadow-sm: 0 3px 8px rgba(87, 74, 64, 0.08);
+  --shadow-md: 0 8px 20px rgba(87, 74, 64, 0.12);
+  --shadow-lg: 0 14px 36px rgba(87, 74, 64, 0.16);
 
   /* Fonts */
   --font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -94,6 +95,13 @@
   --accent-gold: #D97706;
   --accent-success: #059669;
   --accent-danger: #DC2626;
+  --accent-badge: #FF8500;
+
+  /* Radius & Shadows */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for ICE Theme */
   --tile-2: #E0F2FE;
@@ -138,9 +146,9 @@
   --tile-super: #7DD3FC;
   --tile-super-text: #0C4A6E;
 
-  --shadow-sm: 0 2px 6px rgba(15, 56, 102, 0.1);
-  --shadow-md: 0 6px 16px rgba(15, 56, 102, 0.15);
-  --shadow-lg: 0 12px 32px rgba(15, 56, 102, 0.2);
+  --shadow-sm: 0 3px 8px rgba(15, 56, 102, 0.12);
+  --shadow-md: 0 8px 20px rgba(15, 56, 102, 0.18);
+  --shadow-lg: 0 14px 36px rgba(15, 56, 102, 0.24);
 }
 
 /* DARK OBSIDIAN THEME - High-Energy Neon Glow on Dark Slate */
@@ -161,6 +169,13 @@
   --accent-gold: #F59E0B;
   --accent-success: #10B981;
   --accent-danger: #EF4444;
+  --accent-badge: #FF8500;
+
+  /* Radius & Shadows */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for DARK Theme */
   --tile-2: #1E293B;
@@ -205,9 +220,9 @@
   --tile-super: #FACC15;
   --tile-super-text: #0F172A;
 
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 3px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 14px 36px rgba(0, 0, 0, 0.55);
 }
 
 /* CYBER NEON THEME - Cyberpunk Synthwave Electric Palette */
@@ -228,6 +243,13 @@
   --accent-gold: #FBBF24;
   --accent-success: #34D399;
   --accent-danger: #F43F5E;
+  --accent-badge: #FF8500;
+
+  /* Radius & Shadows */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for CYBER Theme */
   --tile-2: #2E1065;
@@ -272,9 +294,9 @@
   --tile-super: #FDE047;
   --tile-super-text: #180828;
 
-  --shadow-sm: 0 2px 4px rgba(236, 72, 153, 0.2);
-  --shadow-md: 0 6px 16px rgba(236, 72, 153, 0.3);
-  --shadow-lg: 0 12px 32px rgba(236, 72, 153, 0.4);
+  --shadow-sm: 0 3px 8px rgba(236, 72, 153, 0.25);
+  --shadow-md: 0 8px 20px rgba(236, 72, 153, 0.35);
+  --shadow-lg: 0 14px 36px rgba(236, 72, 153, 0.45);
 }
 
 /* SUNSET GOLD THEME - Twilight Dusk to Solstice Spectrum */
@@ -295,6 +317,13 @@
   --accent-gold: #F59E0B;
   --accent-success: #10B981;
   --accent-danger: #EF4444;
+  --accent-badge: #FF8500;
+
+  /* Radius & Shadows */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for SUNSET Theme */
   --tile-2: #3A233D;
@@ -339,7 +368,7 @@
   --tile-super: #FACC15;
   --tile-super-text: #1F1924;
 
-  --shadow-sm: 0 2px 4px rgba(249, 115, 22, 0.2);
-  --shadow-md: 0 6px 16px rgba(249, 115, 22, 0.3);
-  --shadow-lg: 0 12px 32px rgba(249, 115, 22, 0.4);
+  --shadow-sm: 0 3px 8px rgba(249, 115, 22, 0.25);
+  --shadow-md: 0 8px 20px rgba(249, 115, 22, 0.35);
+  --shadow-lg: 0 14px 36px rgba(249, 115, 22, 0.45);
 }

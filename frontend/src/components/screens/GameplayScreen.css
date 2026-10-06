@@ -2,22 +2,78 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 4px 6px;
+  justify-content: space-evenly;
+  padding: 12px 14px;
   position: relative;
   width: 100%;
   height: 100%;
-  max-height: 100%;
+  max-height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+/* 4 Organic Background Corner Arcs */
+.bg-corner {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  background-color: var(--bg-surface);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-corner-tl {
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 96px;
+}
+
+.bg-corner-tr {
+  top: 0;
+  right: 0;
+  border-bottom-left-radius: 96px;
+}
+
+.bg-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-top-right-radius: 96px;
+}
+
+.bg-corner-br {
+  bottom: 0;
+  right: 0;
+  border-top-left-radius: 96px;
 }
 
 @media (max-width: 440px) {
   .gameplay-screen {
-    padding: 2px 4px;
+    padding: 8px 8px;
+  }
+
+  .bg-corner {
+    width: 76px;
+    height: 76px;
+  }
+
+  .bg-corner-tl {
+    border-bottom-right-radius: 76px;
+  }
+
+  .bg-corner-tr {
+    border-bottom-left-radius: 76px;
+  }
+
+  .bg-corner-bl {
+    border-top-right-radius: 76px;
+  }
+
+  .bg-corner-br {
+    border-top-left-radius: 76px;
   }
 }
-
 
 .milestone-toast {
   position: absolute;
@@ -64,4 +120,4 @@
     transform: translate(-50%, 0) scale(1);
     opacity: 1;
   }
-}
+}

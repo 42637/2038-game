@@ -38,7 +38,7 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         title="Undo last move"
         aria-label="Undo last move"
       >
-        <RotateCcw className="action-icon" size={16} />
+        <RotateCcw className="action-icon" size={20} />
         <span className="action-text">UNDO</span>
         <span className="action-badge">{undoCount}</span>
       </button>
@@ -52,7 +52,7 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         title={isHammerActive ? 'Cancel Hammer' : 'Hammer: Destroy 1 tile'}
         aria-label="Hammer tile"
       >
-        <Hammer className="action-icon" size={16} />
+        <Hammer className="action-icon" size={20} />
         <span className="action-text">{isHammerActive ? 'CANCEL' : 'HAMMER'}</span>
         <span className="action-badge">{hammerCount}</span>
       </button>
@@ -64,7 +64,7 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         title="Shuffle: Rearrange tiles"
         aria-label="Shuffle board"
       >
-        <Shuffle className="action-icon" size={16} />
+        <Shuffle className="action-icon" size={20} />
         <span className="action-text">SHUFFLE</span>
         <span className="action-badge">{shuffleCount}</span>
       </button>
@@ -75,10 +75,11 @@ export const ActionBar: React.FC<ActionBarProps> = ({
         title="Toggle Touch Controls D-Pad"
         aria-label="Toggle D-Pad controls"
       >
-        <Gamepad2 className="action-icon" size={16} />
+        <Gamepad2 className="action-icon" size={20} />
         <span className="action-text">D-PAD</span>
       </button>
     </div>
   );
 };
+
 

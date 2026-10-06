@@ -2,11 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  margin: 4px auto 2px auto;
+  gap: 10px;
+  margin: 6px auto 2px auto;
   width: 100%;
   max-width: 440px;
-  padding: 2px 4px;
+  padding: 4px 2px;
   box-sizing: border-box;
   flex-shrink: 0;
 }
@@ -20,19 +20,20 @@
   flex: 1;
   min-width: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
   padding: 8px 4px;
-  height: 38px;
-  border-radius: var(--radius-sm, 10px);
+  height: 60px;
+  border-radius: var(--radius-md, 16px);
   background-color: var(--bg-surface);
   color: var(--text-main);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-family: var(--font-family);
   font-weight: 800;
-  font-size: 0.72rem;
-  letter-spacing: 0.3px;
+  font-size: 0.68rem;
+  letter-spacing: 0.4px;
   cursor: pointer;
   position: relative;
   box-shadow: var(--shadow-sm);
@@ -44,8 +45,9 @@
 
 .action-btn .action-icon {
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
+  color: var(--text-main);
 }
 
 .action-btn .action-text {
@@ -53,6 +55,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1;
+  text-transform: uppercase;
 }
 
 .action-btn:hover:not(:disabled) {
@@ -61,7 +64,7 @@
 }
 
 .action-btn:active:not(:disabled) {
-  transform: translateY(1px);
+  transform: scale(0.95);
 }
 
 .action-btn-active {
@@ -108,22 +111,21 @@
 .action-badge {
   position: absolute;
   top: -6px;
-  right: -4px;
+  right: -3px;
   z-index: 5;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  width: 20px;
+  height: 20px;
+  background: var(--accent-badge, #FF8500);
   color: #ffffff;
   border-radius: 999px;
-  padding: 0 4px;
   font-size: 0.65rem;
   font-weight: 900;
   line-height: 1;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  border: 1.5px solid var(--bg-primary, #0f172a);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--bg-primary, #FAF5EE);
   pointer-events: none;
   box-sizing: border-box;
 }
@@ -132,83 +134,58 @@
 
 @media (max-width: 440px) {
   .action-bar-container {
-    gap: 6px;
-    padding: 2px 4px;
+    gap: 8px;
+    padding: 2px 2px;
     margin: 6px auto 2px auto;
   }
 
   .action-btn {
-    height: 36px;
-    padding: 6px 3px;
+    height: 56px;
+    padding: 6px 2px;
     gap: 3px;
-    font-size: 0.68rem;
-    letter-spacing: 0.1px;
+    font-size: 0.64rem;
+    border-radius: 14px;
   }
 
   .action-btn .action-icon {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
 
   .action-badge {
     top: -5px;
-    right: -3px;
-    min-width: 16px;
-    height: 16px;
+    right: -2px;
+    width: 18px;
+    height: 18px;
     font-size: 0.6rem;
-    padding: 0 3px;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 360px) {
   .action-bar-container {
-    gap: 4px;
+    gap: 6px;
   }
 
   .action-btn {
-    height: 34px;
+    height: 50px;
     padding: 5px 2px;
     gap: 2px;
-    font-size: 0.63rem;
+    font-size: 0.58rem;
+    border-radius: 12px;
   }
 
   .action-btn .action-icon {
-    width: 14px;
-    height: 14px;
-  }
-
-  .action-badge {
-    top: -5px;
-    right: -3px;
-    min-width: 15px;
-    height: 15px;
-    font-size: 0.58rem;
-    border-width: 1px;
-  }
-}
-
-@media (max-width: 330px) {
-  .action-bar-container {
-    gap: 3px;
-  }
-
-  .action-btn {
-    height: 32px;
-    padding: 4px 1px;
-    font-size: 0.58rem;
-    letter-spacing: 0;
-  }
-
-  .action-btn .action-icon {
-    width: 13px;
-    height: 13px;
+    width: 16px;
+    height: 16px;
   }
 
   .action-badge {
     top: -4px;
     right: -2px;
-    min-width: 14px;
-    height: 14px;
+    width: 17px;
+    height: 17px;
     font-size: 0.55rem;
+    border-width: 1.5px;
   }
-}
+}
+
