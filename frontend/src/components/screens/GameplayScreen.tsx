@@ -694,16 +694,23 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
     });
   };
 
+  const handleSelectTheme = (selectedTheme: Theme) => {
+    const updated = { ...settings, theme: selectedTheme };
+    gameStorage.saveSettings(updated);
+    if (onUpdateSettings) {
+      onUpdateSettings(updated);
+    }
+    audioService.playMoveSound(settings.soundEnabled);
+    setToastMessage({ text: `🎨 Theme: ${selectedTheme}`, type: 'info' });
+    setTimeout(() => setToastMessage(null), 1400);
+  };
+
   const handleCycleTheme = () => {
     const themes: Theme[] = ['CLASSIC', 'DARK', 'CYBER', 'ICE', 'SUNSET'];
     const current = settings.theme || 'CLASSIC';
     const nextIdx = (themes.indexOf(current) + 1) % themes.length;
     const nextTheme = themes[nextIdx];
-    const updated = { ...settings, theme: nextTheme };
-    gameStorage.saveSettings(updated);
-    if (onUpdateSettings) {
-      onUpdateSettings(updated);
-    }
+    handleSelectTheme(nextTheme);
   };
 
   const handlePause = () => {
@@ -790,13 +797,6 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
       {/* Confetti Celebration Overlay */}
       {showConfetti && <ConfettiEffect durationMs={3000} onFinish={() => setShowConfetti(false)} />}
 
-      {/* Milestone Toast Overlay */}
-      {toastMessage && (
-        <div className={`milestone-toast ${toastMessage.type ? `toast-${toastMessage.type}` : ''}`}>
-          <span>{toastMessage.text}</span>
-        </div>
-      )}
-
       {/* Gameplay Header */}
       <GameHeader
         mode={mode}
@@ -808,8 +808,10 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
         moveLimit={gameState.moveLimit}
         targetTile={gameState.targetTile}
         timeRemaining={mode === 'TIME_ATTACK' ? gameState.timeRemaining : undefined}
+        toastMessage={toastMessage}
         currentTheme={settings.theme}
         onCycleTheme={handleCycleTheme}
+        onSelectTheme={handleSelectTheme}
         onRestart={handleRequestRestart}
         onPause={handlePause}
         onMainMenu={onMainMenu}

@@ -7,18 +7,46 @@
   gap: 8px;
   flex-shrink: 0;
   box-sizing: border-box;
+  position: relative;
 }
 
 .header-top {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   padding: 0 4px;
   box-sizing: border-box;
+  position: relative;
 }
 
-/* Home / Settings Card Buttons */
+.header-left-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  justify-self: start;
+}
+
+.header-center-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  justify-self: center;
+}
+
+.header-right-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  justify-self: end;
+  position: relative;
+}
+
+/* Home / Settings / Theme Card Buttons */
 .header-pill-btn {
   width: 44px;
   height: 44px;
@@ -31,14 +59,16 @@
   justify-content: center;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
   touch-action: manipulation;
   flex-shrink: 0;
 }
 
-.header-pill-btn:hover {
+.header-pill-btn:hover,
+.header-pill-btn.active {
   background-color: var(--bg-surface-hover);
   transform: translateY(-1px);
+  border-color: var(--accent-primary);
 }
 
 .header-pill-btn:active {
@@ -50,14 +80,6 @@
 }
 
 /* Center Title Group with Rays and 4x4 Pill */
-.header-center-title-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-}
-
 .title-with-rays {
   display: flex;
   align-items: center;
@@ -99,10 +121,108 @@
   justify-content: center;
 }
 
-.header-right-actions {
+/* Theme Picker Dropdown Popover */
+.theme-picker-wrapper {
+  position: relative;
+}
+
+.theme-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.theme-dropdown-menu {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--bg-surface, #FAF8EF);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md, 16px);
+  padding: 8px;
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+  animation: themeMenuPop 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes themeMenuPop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.theme-menu-title {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted, #776E65);
+  padding: 4px 8px 6px 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 2px;
+}
+
+.theme-option-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm, 10px);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-main, #776E65);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.theme-option-item:hover {
+  background-color: var(--bg-surface-hover, rgba(0, 0, 0, 0.06));
+}
+
+.theme-option-item.active-theme {
+  background-color: var(--accent-primary, #C5A07B);
+  color: var(--text-light, #FFFFFF);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-emoji-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.theme-name-text {
+  flex: 1;
+}
+
+.theme-color-badge {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  flex-shrink: 0;
+}
+
+.theme-check-icon {
+  margin-left: 2px;
+  flex-shrink: 0;
 }
 
 /* Score Cards Row */
@@ -277,4 +397,53 @@
     width: 14px;
     height: 11px;
   }
-}
+}
+
+/* Floating Notification Toast Pill */
+.milestone-toast {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 0 12px rgba(255, 255, 255, 0.15);
+  z-index: 100;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+  animation: toastPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.milestone-toast.toast-defuse {
+  background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+  border-color: #34D399;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.5);
+}
+
+.milestone-toast.toast-penalty {
+  background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+  border-color: #F87171;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.5);
+}
+
+@keyframes toastPop {
+  0% {
+    transform: translate(-50%, -10px) scale(0.85);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+  }
+}

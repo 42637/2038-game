@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Settings, Flame, Snowflake } from 'lucide-react';
+import { Home, Settings, Flame, Snowflake, Palette } from 'lucide-react';
 import { BoardSize, GameMode, Theme } from '../../types/game';
 import './GameHeader.css';
 
@@ -13,8 +13,10 @@ interface GameHeaderProps {
   moveLimit?: number;
   targetTile?: number;
   timeRemaining?: number;
+  toastMessage?: { text: string; type?: 'defuse' | 'penalty' | 'info' } | null;
   currentTheme?: Theme;
   onCycleTheme?: () => void;
+  onSelectTheme?: (theme: Theme) => void;
   onRestart?: () => void;
   onPause: () => void;
   onMainMenu?: () => void;
@@ -30,6 +32,7 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
   moveLimit,
   targetTile,
   timeRemaining,
+  toastMessage,
   currentTheme = 'CLASSIC',
   onCycleTheme,
   onRestart,
@@ -76,14 +79,16 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
       {/* Top Action Header Navigation Bar */}
       <div className="header-top">
         {/* Left Home Button */}
-        <button
-          className="header-pill-btn home-btn"
-          onClick={onMainMenu}
-          title="Home / Main Menu"
-          aria-label="Main Menu"
-        >
-          <Home size={22} className="header-btn-icon" />
-        </button>
+        <div className="header-left-actions">
+          <button
+            className="header-pill-btn home-btn"
+            onClick={onMainMenu}
+            title="Home / Main Menu"
+            aria-label="Main Menu"
+          >
+            <Home size={22} className="header-btn-icon" />
+          </button>
+        </div>
 
         {/* Center Title & Board Size Pill */}
         <div className="header-center-title-group">
@@ -110,15 +115,28 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
           </div>
         </div>
 
-        {/* Right Settings Gear Button */}
-        <button
-          className="header-pill-btn settings-btn"
-          onClick={onPause}
-          title="Settings / Pause"
-          aria-label="Settings"
-        >
-          <Settings size={22} className="header-btn-icon" />
-        </button>
+        {/* Right Action Buttons (Direct Theme Switcher & Settings) */}
+        <div className="header-right-actions">
+          {onCycleTheme && (
+            <button
+              className="header-pill-btn theme-btn"
+              onClick={onCycleTheme}
+              title={`Theme: ${currentTheme} (Click to change theme)`}
+              aria-label="Change Theme"
+            >
+              <Palette size={20} className="header-btn-icon" />
+            </button>
+          )}
+
+          <button
+            className="header-pill-btn settings-btn"
+            onClick={onPause}
+            title="Settings / Pause"
+            aria-label="Settings"
+          >
+            <Settings size={22} className="header-btn-icon" />
+          </button>
+        </div>
       </div>
 
       {/* Mode Specific Hints */}
@@ -181,7 +199,15 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
           )}
         </div>
       )}
+
+      {/* Floating Notification Toast Pill */}
+      {toastMessage && (
+        <div className={`milestone-toast ${toastMessage.type ? `toast-${toastMessage.type}` : ''}`}>
+          <span>{toastMessage.text}</span>
+        </div>
+      )}
     </header>
   );
 };
+
 
