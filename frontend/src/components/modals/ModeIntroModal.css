@@ -14,9 +14,17 @@
   background-color: var(--bg-surface);
 }
 
-.challenge-icon { color: var(--accent-gold); }
-.hardcore-icon { color: var(--accent-danger); }
-.mega-icon { color: var(--accent-primary); }
+.challenge-icon {
+  color: var(--accent-gold);
+}
+
+.hardcore-icon {
+  color: var(--accent-danger);
+}
+
+.mega-icon {
+  color: var(--accent-primary);
+}
 
 .intro-bullets {
   background-color: var(--bg-surface);

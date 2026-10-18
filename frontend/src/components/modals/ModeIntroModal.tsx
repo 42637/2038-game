@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, ShieldAlert, Grid3X3, Play, ArrowLeft, Bomb, Snowflake, Calendar } from 'lucide-react';
+import { Target, Play, ArrowLeft, Snowflake, Calendar } from 'lucide-react';
 import { GameMode } from '../../types/game';
 import './ModeIntroModal.css';
 
@@ -23,42 +23,6 @@ export const ModeIntroModal: React.FC<ModeIntroModalProps> = ({ mode, onStart, o
             'Progress through 7 increasing difficulty levels',
           ],
           startText: 'START CHALLENGE',
-        };
-      case 'HARDCORE':
-        return {
-          icon: <ShieldAlert size={36} className="intro-icon hardcore-icon" />,
-          title: 'HARDCORE MODE',
-          subtitle: 'Play with the original rules and no second chances.',
-          bullets: [
-            'No Undo support',
-            'No Power-ups or recovery tools',
-            'One mistake can end your run. Pure skill.',
-          ],
-          startText: 'START HARDCORE',
-        };
-      case 'MEGA_BOARD':
-        return {
-          icon: <Grid3X3 size={36} className="intro-icon mega-icon" />,
-          title: 'MEGA BOARD (5×5)',
-          subtitle: 'More space. More possibilities. Reach higher tiles.',
-          bullets: [
-            'Expanded 5 columns × 5 rows grid',
-            'Higher tile combinations beyond 2048',
-            'Same classic swipe mechanics',
-          ],
-          startText: 'PLAY MEGA BOARD',
-        };
-      case 'BOMB':
-        return {
-          icon: <Bomb size={36} className="intro-icon bomb-icon" />,
-          title: 'BOMB MODE',
-          subtitle: 'DEFUSE bombs before the 2-move fuse expires!',
-          bullets: [
-            'Bombs spawn with a 2-move countdown fuse',
-            'Merge adjacent tiles to DEFUSE the bomb for a +300 PTS bonus',
-            'If the 2-move fuse reaches 0 without defusal, the bomb EXPLODES (-200 PTS penalty)!',
-          ],
-          startText: 'START BOMB MODE',
         };
       case 'ICE':
         return {

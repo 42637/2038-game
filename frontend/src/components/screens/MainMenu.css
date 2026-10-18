@@ -201,16 +201,6 @@
   color: #FFFFFF;
 }
 
-.hardcore-card {
-  background-color: var(--accent-danger);
-  color: var(--text-light);
-}
-
-.mega-card {
-  background-color: #059669;
-  color: var(--text-light);
-}
-
 .bomb-card {
   background-color: #DC2626;
   color: var(--text-light);

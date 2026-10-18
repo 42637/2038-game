@@ -69,7 +69,7 @@ describe('gameStorage Utility', () => {
     // Missing nested properties fallback to defaults, not undefined
     expect(loaded.movesChallenge.bestMovesPerLevel).toEqual({});
     expect(loaded.movesChallenge.attemptsCount).toBe(0);
-    expect(loaded.hardcore.bestScore).toBe(0);
+    expect(loaded.hardcore?.bestScore).toBe(0);
   });
 
   it('saves, loads, clears and checks active game state', () => {

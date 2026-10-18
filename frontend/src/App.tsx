@@ -103,18 +103,6 @@ export const App: React.FC = () => {
       setPendingIntroMode('MOVES_CHALLENGE');
       return;
     }
-    if (mode === 'HARDCORE' && !intros.hardcoreShown) {
-      setPendingIntroMode('HARDCORE');
-      return;
-    }
-    if (mode === 'MEGA_BOARD' && !intros.megaBoardShown) {
-      setPendingIntroMode('MEGA_BOARD');
-      return;
-    }
-    if (mode === 'BOMB' && !intros.bombShown) {
-      setPendingIntroMode('BOMB');
-      return;
-    }
     if (mode === 'ICE' && !intros.iceShown) {
       setPendingIntroMode('ICE');
       return;
@@ -131,11 +119,6 @@ export const App: React.FC = () => {
       setCurrentDailyChallenge(generateDailyChallenge(getTodayDateSeed()));
       setActiveScreen('DAILY_CHALLENGE');
     } else {
-      if (mode === 'HARDCORE') {
-        audioService.playHardcoreStartSound(settings.soundEnabled);
-      } else if (mode === 'MEGA_BOARD') {
-        audioService.playMegaBoardStartSound(settings.soundEnabled);
-      }
       setSelectedChallenge(undefined);
       setActiveScreen('GAMEPLAY');
     }
@@ -147,9 +130,6 @@ export const App: React.FC = () => {
     const updatedIntros = { ...intros };
 
     if (mode === 'MOVES_CHALLENGE') updatedIntros.movesChallengeShown = true;
-    if (mode === 'HARDCORE') updatedIntros.hardcoreShown = true;
-    if (mode === 'MEGA_BOARD') updatedIntros.megaBoardShown = true;
-    if (mode === 'BOMB') updatedIntros.bombShown = true;
     if (mode === 'ICE') updatedIntros.iceShown = true;
     if (mode === 'DAILY_CHALLENGE') updatedIntros.dailyShown = true;
 
@@ -163,11 +143,6 @@ export const App: React.FC = () => {
       setCurrentDailyChallenge(generateDailyChallenge(getTodayDateSeed()));
       setActiveScreen('DAILY_CHALLENGE');
     } else {
-      if (mode === 'HARDCORE') {
-        audioService.playHardcoreStartSound(settings.soundEnabled);
-      } else if (mode === 'MEGA_BOARD') {
-        audioService.playMegaBoardStartSound(settings.soundEnabled);
-      }
       setSelectedChallenge(undefined);
       setActiveScreen('GAMEPLAY');
     }

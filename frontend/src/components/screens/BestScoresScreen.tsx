@@ -5,10 +5,7 @@ import {
   Infinity as InfinityIcon,
   Timer,
   Target,
-  ShieldAlert,
-  Grid3X3,
   UserCheck,
-  Bomb,
   Snowflake,
   Calendar,
   Flame,
@@ -116,72 +113,6 @@ export const BestScoresScreen: React.FC<BestScoresScreenProps> = ({ records, onB
                     <span className="record-stat-num">
                       L{records.movesChallenge?.highestUnlockedLevel || 1}
                     </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Hardcore Mode */}
-              <div className="record-card">
-                <div className="record-card-header">
-                  <div className="record-icon hardcore-bg">
-                    <ShieldAlert size={20} />
-                  </div>
-                  <span className="record-mode-title">HARDCORE MODE</span>
-                </div>
-                <div className="record-stats-row">
-                  <div className="record-stat-box">
-                    <span className="record-stat-lbl">BEST SCORE</span>
-                    <span className="record-stat-num">
-                      {(records.hardcore?.bestScore || 0).toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="record-stat-box">
-                    <span className="record-stat-lbl">HIGHEST TILE</span>
-                    <span className="record-stat-num">{records.hardcore?.highestTile || 2}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Mega Board Mode */}
-              <div className="record-card">
-                <div className="record-card-header">
-                  <div className="record-icon mega-bg">
-                    <Grid3X3 size={20} />
-                  </div>
-                  <span className="record-mode-title">MEGA BOARD</span>
-                </div>
-                <div className="record-stats-row">
-                  <div className="record-stat-box">
-                    <span className="record-stat-lbl">BEST SCORE</span>
-                    <span className="record-stat-num">
-                      {(records.megaBoard?.bestScore || 0).toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="record-stat-box">
-                    <span className="record-stat-lbl">HIGHEST TILE</span>
-                    <span className="record-stat-num">{records.megaBoard?.highestTile || 2}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bomb Mode */}
-              <div className="record-card">
-                <div className="record-card-header">
-                  <div className="record-icon bomb-bg">
-                    <Bomb size={20} />
-                  </div>
-                  <span className="record-mode-title">BOMB MODE</span>
-                </div>
-                <div className="record-stats-row">
-                  <div className="record-stat-box">
-                    <span className="record-stat-lbl">BEST SCORE</span>
-                    <span className="record-stat-num">
-                      {(records.bomb?.bestScore || 0).toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="record-stat-box">
-                    <span className="record-stat-lbl">BOMBS TRIGGERED</span>
-                    <span className="record-stat-num">{records.bomb?.bombsTriggered || 0}</span>
                   </div>
                 </div>
               </div>

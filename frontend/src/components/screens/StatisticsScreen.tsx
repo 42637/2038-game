@@ -48,8 +48,8 @@ export const StatisticsScreen: React.FC<StatisticsScreenProps> = ({ stats, recor
           </div>
         </div>
 
-        {/* Primary Modes Breakdown */}
-        <h3 className="section-title">Primary Modes</h3>
+        {/* Game Modes Breakdown */}
+        <h3 className="section-title">Modes Breakdown</h3>
         <div className="mode-breakdown-card">
           <div className="breakdown-row">
             <span className="breakdown-name">Classic Games</span>
@@ -63,34 +63,10 @@ export const StatisticsScreen: React.FC<StatisticsScreenProps> = ({ stats, recor
             <span className="breakdown-name">Time Attack Games</span>
             <span className="breakdown-val">{stats.timeAttackGames || 0}</span>
           </div>
-        </div>
-
-        {/* Expansion Modes Breakdown */}
-        <h3 className="section-title">Expansion Modes</h3>
-        <div className="mode-breakdown-card">
           <div className="breakdown-row">
             <span className="breakdown-name">Moves Challenge Cleared</span>
             <span className="breakdown-val">
               {stats.movesChallengeCompleted || 0} / 7
-            </span>
-          </div>
-          <div className="breakdown-row">
-            <span className="breakdown-name">Hardcore Games</span>
-            <span className="breakdown-val">{stats.hardcoreGames || 0}</span>
-          </div>
-          <div className="breakdown-row">
-            <span className="breakdown-name">Mega Board Games (5×5)</span>
-            <span className="breakdown-val">{stats.megaBoardGames || 0}</span>
-          </div>
-        </div>
-
-        {/* Phase 3 Special Modes Breakdown */}
-        <h3 className="section-title">Special Modes & Daily</h3>
-        <div className="mode-breakdown-card">
-          <div className="breakdown-row">
-            <span className="breakdown-name">Bomb Games / Detonated</span>
-            <span className="breakdown-val">
-              {stats.bombGames || 0} ({stats.bombsTriggered || 0}💣)
             </span>
           </div>
           <div className="breakdown-row">
@@ -125,24 +101,6 @@ export const StatisticsScreen: React.FC<StatisticsScreenProps> = ({ stats, recor
           <div className="breakdown-row">
             <span className="breakdown-name">Best Time Attack</span>
             <span className="breakdown-val">{records.timeAttackBest.toLocaleString()}</span>
-          </div>
-          <div className="breakdown-row">
-            <span className="breakdown-name">Best Hardcore</span>
-            <span className="breakdown-val">
-              {(records.hardcore?.bestScore || 0).toLocaleString()}
-            </span>
-          </div>
-          <div className="breakdown-row">
-            <span className="breakdown-name">Best Mega Board</span>
-            <span className="breakdown-val">
-              {(records.megaBoard?.bestScore || 0).toLocaleString()}
-            </span>
-          </div>
-          <div className="breakdown-row">
-            <span className="breakdown-name">Best Bomb Mode</span>
-            <span className="breakdown-val">
-              {(records.bomb?.bestScore || 0).toLocaleString()}
-            </span>
           </div>
           <div className="breakdown-row">
             <span className="breakdown-name">Best Ice Mode</span>

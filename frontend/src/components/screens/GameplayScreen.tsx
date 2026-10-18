@@ -72,8 +72,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
   onMainMenu,
 }) => {
   const modeConfig = GAME_MODE_CONFIGS[mode];
-  const activeBoardSize: BoardSize =
-    mode === 'MEGA_BOARD' ? (settings.boardSize >= 5 ? settings.boardSize : 5) : settings.boardSize || 4;
+  const activeBoardSize: BoardSize = settings.boardSize || 4;
 
   const initialTargetTile =
     mode === 'MOVES_CHALLENGE'
@@ -112,10 +111,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
 
     let board = initializeBoard(activeBoardSize);
 
-    if (mode === 'BOMB') {
-      const spawned = spawnSpecialTile(board, 'BOMB', activeBoardSize);
-      board = spawned.board;
-    } else if (mode === 'ICE') {
+    if (mode === 'ICE') {
       const spawned = spawnSpecialTile(board, 'ICE', activeBoardSize);
       board = spawned.board;
     }
@@ -171,14 +167,8 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
         return records.endlessBest;
       case 'TIME_ATTACK':
         return records.timeAttackBest;
-      case 'HARDCORE':
-        return records.hardcore.bestScore;
-      case 'MEGA_BOARD':
-        return records.megaBoard.bestScore;
-      case 'BOMB':
-        return records.bomb.bestScore;
       case 'ICE':
-        return records.ice.bestScore;
+        return records.ice?.bestScore || 0;
       case 'DAILY_CHALLENGE':
         return records.daily.bestScore;
       case 'MOVES_CHALLENGE':
@@ -268,20 +258,13 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
           }, 850);
         }
 
-        // Tile spawn logic (chance of special tile in BOMB or ICE mode)
+        // Tile spawn logic (chance of special tile in ICE mode)
         let nextBoard = result.board;
-        let spawnedSpecial: 'BOMB' | 'ICE' | null = null;
+        let spawnedSpecial: 'ICE' | null = null;
 
-        const hasBombOnBoard = nextBoard.some((r) => r.some((c) => c?.specialType === 'BOMB'));
         const hasIceOnBoard = nextBoard.some((r) => r.some((c) => c?.specialType === 'ICE' && c.isFrozen));
 
-        if (mode === 'BOMB' && !hasBombOnBoard && Math.random() < 0.35) {
-          const bombSpawn = spawnSpecialTile(nextBoard, 'BOMB', currentSize);
-          if (bombSpawn.newTile) {
-            nextBoard = bombSpawn.board;
-            spawnedSpecial = 'BOMB';
-          }
-        } else if (mode === 'ICE' && !hasIceOnBoard && Math.random() < 0.35) {
+        if (mode === 'ICE' && !hasIceOnBoard && Math.random() < 0.35) {
           const iceSpawn = spawnSpecialTile(nextBoard, 'ICE', currentSize);
           if (iceSpawn.newTile) {
             nextBoard = iceSpawn.board;
@@ -511,35 +494,14 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
           } else if (mode === 'TIME_ATTACK') {
             updatedRecords.timeAttackBest = newScore;
             updatedRecords.timeAttackHighestTile = Math.max(records.timeAttackHighestTile, newHighestTile);
-          } else if (mode === 'HARDCORE') {
-            updatedRecords.hardcore = {
-              ...records.hardcore,
-              bestScore: newScore,
-              highestTile: Math.max(records.hardcore.highestTile, newHighestTile),
-              bestMoves: newMoves,
-            };
-          } else if (mode === 'MEGA_BOARD') {
-            updatedRecords.megaBoard = {
-              ...records.megaBoard,
-              bestScore: newScore,
-              highestTile: Math.max(records.megaBoard.highestTile, newHighestTile),
-              bestMoves: newMoves,
-            };
-          } else if (mode === 'BOMB') {
-            updatedRecords.bomb = {
-              ...records.bomb,
-              bestScore: newScore,
-              highestTile: Math.max(records.bomb.highestTile, newHighestTile),
-              bestMoves: newMoves,
-              bombsTriggered: newBombsTriggered,
-            };
           } else if (mode === 'ICE') {
             updatedRecords.ice = {
               ...records.ice,
               bestScore: newScore,
-              highestTile: Math.max(records.ice.highestTile, newHighestTile),
+              highestTile: Math.max(records.ice?.highestTile || 0, newHighestTile),
               bestMoves: newMoves,
               iceCleared: newIceCleared,
+              gamesPlayed: (records.ice?.gamesPlayed || 0) + 1,
             };
           }
 
@@ -561,14 +523,9 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
             classicGames: mode === 'CLASSIC' ? stats.classicGames + 1 : stats.classicGames,
             endlessGames: mode === 'ENDLESS' ? stats.endlessGames + 1 : stats.endlessGames,
             timeAttackGames: mode === 'TIME_ATTACK' ? stats.timeAttackGames + 1 : stats.timeAttackGames,
-            hardcoreGames: mode === 'HARDCORE' ? stats.hardcoreGames + 1 : stats.hardcoreGames,
-            hardcoreHighestTile: mode === 'HARDCORE' ? Math.max(stats.hardcoreHighestTile, newHighestTile) : stats.hardcoreHighestTile,
-            megaBoardGames: mode === 'MEGA_BOARD' ? stats.megaBoardGames + 1 : stats.megaBoardGames,
-            megaBoardHighestTile: mode === 'MEGA_BOARD' ? Math.max(stats.megaBoardHighestTile, newHighestTile) : stats.megaBoardHighestTile,
-            megaBoardBestScore: mode === 'MEGA_BOARD' ? Math.max(stats.megaBoardBestScore, newScore) : stats.megaBoardBestScore,
-            bombGames: mode === 'BOMB' ? stats.bombGames + 1 : stats.bombGames,
-            bombsTriggered: stats.bombsTriggered + specialResult.bombsDetonatedCount,
-            bombBestScore: mode === 'BOMB' ? Math.max(stats.bombBestScore, newScore) : stats.bombBestScore,
+            bombGames: stats.bombGames,
+            bombsTriggered: stats.bombsTriggered,
+            bombBestScore: stats.bombBestScore,
             iceGames: mode === 'ICE' ? stats.iceGames + 1 : stats.iceGames,
             iceCleared: stats.iceCleared + specialResult.iceUnfrozenCount,
             iceBestScore: mode === 'ICE' ? Math.max(stats.iceBestScore, newScore) : stats.iceBestScore,
@@ -732,9 +689,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
     setIsHammerActive(false);
     let newBoard = initializeBoard(activeBoardSize);
 
-    if (mode === 'BOMB') {
-      newBoard = spawnSpecialTile(newBoard, 'BOMB', activeBoardSize).board;
-    } else if (mode === 'ICE') {
+    if (mode === 'ICE') {
       newBoard = spawnSpecialTile(newBoard, 'ICE', activeBoardSize).board;
     }
 
@@ -797,6 +752,13 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
       {/* Confetti Celebration Overlay */}
       {showConfetti && <ConfettiEffect durationMs={3000} onFinish={() => setShowConfetti(false)} />}
 
+      {/* Milestone Toast Overlay */}
+      {toastMessage && (
+        <div className={`milestone-toast ${toastMessage.type ? `toast-${toastMessage.type}` : ''}`}>
+          <span>{toastMessage.text}</span>
+        </div>
+      )}
+
       {/* Gameplay Header */}
       <GameHeader
         mode={mode}
@@ -808,7 +770,6 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
         moveLimit={gameState.moveLimit}
         targetTile={gameState.targetTile}
         timeRemaining={mode === 'TIME_ATTACK' ? gameState.timeRemaining : undefined}
-        toastMessage={toastMessage}
         currentTheme={settings.theme}
         onCycleTheme={handleCycleTheme}
         onSelectTheme={handleSelectTheme}

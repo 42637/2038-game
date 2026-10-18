@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Settings, Flame, Snowflake, Palette } from 'lucide-react';
+import { Home, Settings, Snowflake, Palette } from 'lucide-react';
 import { BoardSize, GameMode, Theme } from '../../types/game';
 import './GameHeader.css';
 
@@ -13,7 +13,6 @@ interface GameHeaderProps {
   moveLimit?: number;
   targetTile?: number;
   timeRemaining?: number;
-  toastMessage?: { text: string; type?: 'defuse' | 'penalty' | 'info' } | null;
   currentTheme?: Theme;
   onCycleTheme?: () => void;
   onSelectTheme?: (theme: Theme) => void;
@@ -32,7 +31,6 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
   moveLimit,
   targetTile,
   timeRemaining,
-  toastMessage,
   currentTheme = 'CLASSIC',
   onCycleTheme,
   onRestart,
@@ -49,12 +47,6 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
         return 'TIME ATTACK';
       case 'MOVES_CHALLENGE':
         return 'CHALLENGE';
-      case 'HARDCORE':
-        return 'HARDCORE';
-      case 'MEGA_BOARD':
-        return 'MEGA BOARD';
-      case 'BOMB':
-        return 'BOMB MODE';
       case 'ICE':
         return 'ICE MODE';
       case 'DAILY_CHALLENGE':
@@ -140,13 +132,6 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
       </div>
 
       {/* Mode Specific Hints */}
-      {mode === 'BOMB' && (
-        <div className="mode-hint-bar bomb-hint-bar">
-          <Flame size={14} className="hint-icon" />
-          <span>Merge adjacent tiles to DEFUSE (+300 PTS)! If fuse hits 0, bomb EXPLODES (-200 PTS).</span>
-        </div>
-      )}
-
       {mode === 'ICE' && (
         <div className="mode-hint-bar ice-hint-bar">
           <Snowflake size={14} className="hint-icon" />
@@ -197,13 +182,6 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
               <span className="stat-value">{timeRemaining}s</span>
             </div>
           )}
-        </div>
-      )}
-
-      {/* Floating Notification Toast Pill */}
-      {toastMessage && (
-        <div className={`milestone-toast ${toastMessage.type ? `toast-${toastMessage.type}` : ''}`}>
-          <span>{toastMessage.text}</span>
         </div>
       )}
     </header>

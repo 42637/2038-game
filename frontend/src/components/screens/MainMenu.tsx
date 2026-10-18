@@ -4,14 +4,12 @@ import {
   Infinity as InfinityIcon,
   Timer,
   Target,
-  ShieldAlert,
   Grid3X3,
   Trophy,
   BarChart3,
   HelpCircle,
   Settings as SettingsIcon,
   Info,
-  Bomb,
   Snowflake,
   Calendar,
 } from 'lucide-react';
@@ -38,8 +36,6 @@ export const MainMenu: React.FC<MainMenuProps> = ({
     records.classicBest,
     records.endlessBest,
     records.timeAttackBest,
-    records.hardcore?.bestScore || 0,
-    records.megaBoard?.bestScore || 0,
     records.bomb?.bestScore || 0,
     records.ice?.bestScore || 0
   );
@@ -47,8 +43,6 @@ export const MainMenu: React.FC<MainMenuProps> = ({
     records.classicHighestTile,
     records.endlessHighestTile,
     records.timeAttackHighestTile,
-    records.hardcore?.highestTile || 0,
-    records.megaBoard?.highestTile || 0,
     records.bomb?.highestTile || 0,
     records.ice?.highestTile || 0
   );
@@ -114,9 +108,9 @@ export const MainMenu: React.FC<MainMenuProps> = ({
         </div>
       </div>
 
-      {/* SECTION 1: PRIMARY MODES */}
+      {/* GAME MODES */}
       <div className="menu-section">
-        <span className="menu-section-title">PRIMARY MODES</span>
+        <span className="menu-section-title">GAME MODES</span>
         <div className="mode-cards-container">
           <button className="mode-card classic-card" onClick={() => onSelectMode('CLASSIC')}>
             <div className="mode-card-icon">
@@ -147,13 +141,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
               <p className="mode-card-desc">Score before time runs out</p>
             </div>
           </button>
-        </div>
-      </div>
 
-      {/* SECTION 2: EXPANSION MODES */}
-      <div className="menu-section">
-        <span className="menu-section-title">EXPANSION MODES</span>
-        <div className="mode-cards-container">
           <button className="mode-card moves-challenge-card" onClick={() => onSelectMode('MOVES_CHALLENGE')}>
             <div className="mode-card-icon">
               <Target size={24} />
@@ -161,42 +149,6 @@ export const MainMenu: React.FC<MainMenuProps> = ({
             <div className="mode-card-info">
               <h3 className="mode-card-title">MOVES CHALLENGE</h3>
               <p className="mode-card-desc">Reach target in limited moves</p>
-            </div>
-          </button>
-
-          <button className="mode-card hardcore-card" onClick={() => onSelectMode('HARDCORE')}>
-            <div className="mode-card-icon">
-              <ShieldAlert size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">HARDCORE</h3>
-              <p className="mode-card-desc">Standard rules. No help.</p>
-            </div>
-          </button>
-
-          <button className="mode-card mega-card" onClick={() => onSelectMode('MEGA_BOARD')}>
-            <div className="mode-card-icon">
-              <Grid3X3 size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">MEGA BOARD</h3>
-              <p className="mode-card-desc">More space. Bigger numbers.</p>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      {/* SECTION 3: SPECIAL MODES */}
-      <div className="menu-section">
-        <span className="menu-section-title">SPECIAL MODES</span>
-        <div className="mode-cards-container">
-          <button className="mode-card bomb-card" onClick={() => onSelectMode('BOMB')}>
-            <div className="mode-card-icon">
-              <Bomb size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">BOMB MODE</h3>
-              <p className="mode-card-desc">Clear crowded areas with strategic bombs</p>
             </div>
           </button>
 

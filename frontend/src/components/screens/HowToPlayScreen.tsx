@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Hand, Bomb, Snowflake, Calendar } from 'lucide-react';
+import { ArrowLeft, Hand, Snowflake, Calendar } from 'lucide-react';
 import './HowToPlayScreen.css';
 
 interface HowToPlayScreenProps {
@@ -44,15 +44,6 @@ export const HowToPlayScreen: React.FC<HowToPlayScreenProps> = ({ onBack }) => {
                 <span>→</span>
                 <div className="visual-tile t-4">4</div>
               </div>
-            </div>
-          </div>
-
-          {/* Rule 3: Bomb Mode */}
-          <div className="rule-card">
-            <div className="rule-num"><Bomb size={16} /></div>
-            <div className="rule-body">
-              <h4>Bomb Mode</h4>
-              <p>Merge tiles adjacent to a Bomb to detonate a 3×3 surrounding area!</p>
             </div>
           </div>
 

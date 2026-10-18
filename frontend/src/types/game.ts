@@ -5,9 +5,6 @@ export type GameMode =
   | 'ENDLESS'
   | 'TIME_ATTACK'
   | 'MOVES_CHALLENGE'
-  | 'HARDCORE'
-  | 'MEGA_BOARD'
-  | 'BOMB'
   | 'ICE'
   | 'DAILY_CHALLENGE';
 
@@ -169,9 +166,9 @@ export interface RecordsState {
   timeAttackBest: number;
   timeAttackHighestTile: number;
   movesChallenge: MovesChallengeRecordsState;
-  hardcore: ModeRecord;
-  megaBoard: ModeRecord;
-  bomb: ModeRecord & { bombsTriggered: number };
+  hardcore?: ModeRecord;
+  megaBoard?: ModeRecord;
+  bomb?: ModeRecord & { bombsTriggered: number };
   ice: ModeRecord & { iceCleared: number };
   daily: {
     bestScore: number;
@@ -193,11 +190,11 @@ export interface StatisticsState {
   timeAttackGames: number;
   movesChallengeCompleted: number;
   movesChallengeAttempts: number;
-  hardcoreGames: number;
-  hardcoreHighestTile: number;
-  megaBoardGames: number;
-  megaBoardHighestTile: number;
-  megaBoardBestScore: number;
+  hardcoreGames?: number;
+  hardcoreHighestTile?: number;
+  megaBoardGames?: number;
+  megaBoardHighestTile?: number;
+  megaBoardBestScore?: number;
   bombGames: number;
   bombsTriggered: number;
   bombBestScore: number;
@@ -216,10 +213,10 @@ export interface TutorialState {
 }
 
 export interface FirstTimeIntrosState {
-  hardcoreShown: boolean;
+  hardcoreShown?: boolean;
   movesChallengeShown: boolean;
-  megaBoardShown: boolean;
-  bombShown: boolean;
+  megaBoardShown?: boolean;
+  bombShown?: boolean;
   iceShown: boolean;
   dailyShown: boolean;
 }
