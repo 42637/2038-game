@@ -1,24 +1,24 @@
 :root, [data-theme="classic"], [data-theme="white"] {
-  /* Warm Cozy Cream Design System */
-  --bg-primary: #FAF5EE;
-  --bg-surface: #EDE4D8;
-  --bg-surface-hover: #E3D7C8;
+  /* Warm Cozy Cream Design System - Exact Reference Matching */
+  --bg-primary: #FAF4EB;
+  --bg-surface: #FFFDF9;
+  --bg-surface-hover: #F8F2E8;
   --bg-board: #BCAB9B;
   --bg-cell: #CDC0B3;
 
   /* Typography Colors */
-  --text-main: #574A40;
-  --text-muted: #8C7C6D;
+  --text-main: #3B261D;
+  --text-muted: #7D6759;
   --text-light: #FFFFFF;
 
   /* Accent Colors */
   --accent-primary: #C5A07B;
   --accent-primary-hover: #B58F69;
   --accent-secondary: #574A40;
-  --accent-gold: #EDC22E;
+  --accent-gold: #B45309;
   --accent-success: #10B981;
   --accent-danger: #EF4444;
-  --accent-badge: #FF8500;
+  --accent-badge: #EA580C;
 
   /* Distinct High-Contrast Tile Colors for CLASSIC Theme */
   --tile-2: #F5EEE6;
@@ -72,6 +72,29 @@
   --shadow-sm: 0 3px 8px rgba(87, 74, 64, 0.08);
   --shadow-md: 0 8px 20px rgba(87, 74, 64, 0.12);
   --shadow-lg: 0 14px 36px rgba(87, 74, 64, 0.16);
+
+  /* Theme-Reactive Mode & Header Styling */
+  --header-title-gradient: linear-gradient(135deg, #7C5E43 0%, #C5A07B 100%);
+  --card-glass-bg: rgba(237, 228, 216, 0.7);
+  --card-glass-border: rgba(87, 74, 64, 0.15);
+  --mode-classic-bg: linear-gradient(135deg, #C5A07B 0%, #B08960 100%);
+  --mode-classic-glow: rgba(197, 160, 123, 0.35);
+  --mode-endless-bg: linear-gradient(135deg, #7C6853 0%, #574A40 100%);
+  --mode-endless-glow: rgba(87, 74, 64, 0.35);
+  --mode-time-bg: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  --mode-time-glow: rgba(217, 119, 6, 0.35);
+  --mode-moves-bg: linear-gradient(135deg, #B45309 0%, #92400E 100%);
+  --mode-moves-glow: rgba(180, 83, 9, 0.35);
+  --mode-ice-bg: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  --mode-ice-glow: rgba(2, 132, 199, 0.35);
+  --mode-daily-bg: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+  --mode-daily-glow: rgba(124, 58, 237, 0.35);
+
+  /* Reference Card Backgrounds */
+  --card-hero-bg: #FDF5EB;
+  --card-how-bg: #FFFDF9;
+  --card-dock-bg: #FAF3E8;
+  --dock-text: #685346;
 
   /* Fonts */
   --font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -149,6 +172,29 @@
   --shadow-sm: 0 3px 8px rgba(15, 56, 102, 0.12);
   --shadow-md: 0 8px 20px rgba(15, 56, 102, 0.18);
   --shadow-lg: 0 14px 36px rgba(15, 56, 102, 0.24);
+
+  /* Theme-Reactive Mode & Header Styling */
+  --header-title-gradient: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);
+  --card-glass-bg: rgba(216, 236, 253, 0.7);
+  --card-glass-border: rgba(2, 132, 199, 0.25);
+  --mode-classic-bg: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  --mode-classic-glow: rgba(2, 132, 199, 0.35);
+  --mode-endless-bg: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  --mode-endless-glow: rgba(59, 130, 246, 0.35);
+  --mode-time-bg: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+  --mode-time-glow: rgba(14, 165, 233, 0.35);
+  --mode-moves-bg: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
+  --mode-moves-glow: rgba(13, 148, 136, 0.35);
+  --mode-ice-bg: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+  --mode-ice-glow: rgba(6, 182, 212, 0.4);
+  --mode-daily-bg: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+  --mode-daily-glow: rgba(99, 102, 241, 0.35);
+
+  /* Reference Card Backgrounds */
+  --card-hero-bg: #D8ECFD;
+  --card-how-bg: #EBF5FF;
+  --card-dock-bg: #D8ECFD;
+  --dock-text: #0B2545;
 }
 
 /* DARK OBSIDIAN THEME - High-Energy Neon Glow on Dark Slate */
@@ -223,6 +269,29 @@
   --shadow-sm: 0 3px 8px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
   --shadow-lg: 0 14px 36px rgba(0, 0, 0, 0.55);
+
+  /* Theme-Reactive Mode & Header Styling */
+  --header-title-gradient: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
+  --card-glass-bg: rgba(30, 41, 59, 0.7);
+  --card-glass-border: rgba(255, 255, 255, 0.12);
+  --mode-classic-bg: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  --mode-classic-glow: rgba(2, 132, 199, 0.4);
+  --mode-endless-bg: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+  --mode-endless-glow: rgba(99, 102, 241, 0.4);
+  --mode-time-bg: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  --mode-time-glow: rgba(217, 119, 6, 0.4);
+  --mode-moves-bg: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --mode-moves-glow: rgba(16, 185, 129, 0.4);
+  --mode-ice-bg: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+  --mode-ice-glow: rgba(6, 182, 212, 0.4);
+  --mode-daily-bg: linear-gradient(135deg, #EC4899 0%, #BE185D 100%);
+  --mode-daily-glow: rgba(236, 72, 153, 0.4);
+
+  /* Reference Card Backgrounds */
+  --card-hero-bg: #1E293B;
+  --card-how-bg: #1E293B;
+  --card-dock-bg: #1E293B;
+  --dock-text: #94A3B8;
 }
 
 /* CYBER NEON THEME - Cyberpunk Synthwave Electric Palette */
@@ -297,6 +366,29 @@
   --shadow-sm: 0 3px 8px rgba(236, 72, 153, 0.25);
   --shadow-md: 0 8px 20px rgba(236, 72, 153, 0.35);
   --shadow-lg: 0 14px 36px rgba(236, 72, 153, 0.45);
+
+  /* Theme-Reactive Mode & Header Styling */
+  --header-title-gradient: linear-gradient(135deg, #F472B6 0%, #EC4899 50%, #C084FC 100%);
+  --card-glass-bg: rgba(45, 18, 77, 0.7);
+  --card-glass-border: rgba(236, 72, 153, 0.35);
+  --mode-classic-bg: linear-gradient(135deg, #EC4899 0%, #BE185D 100%);
+  --mode-classic-glow: rgba(236, 72, 153, 0.45);
+  --mode-endless-bg: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  --mode-endless-glow: rgba(139, 92, 246, 0.45);
+  --mode-time-bg: linear-gradient(135deg, #EAB308 0%, #CA8A04 100%);
+  --mode-time-glow: rgba(234, 179, 8, 0.45);
+  --mode-moves-bg: linear-gradient(135deg, #F97316 0%, #C2410C 100%);
+  --mode-moves-glow: rgba(249, 115, 22, 0.45);
+  --mode-ice-bg: linear-gradient(135deg, #06B6D4 0%, #0284C7 100%);
+  --mode-ice-glow: rgba(6, 182, 212, 0.45);
+  --mode-daily-bg: linear-gradient(135deg, #A855F7 0%, #7E22CE 100%);
+  --mode-daily-glow: rgba(168, 85, 247, 0.45);
+
+  /* Reference Card Backgrounds */
+  --card-hero-bg: #2D124D;
+  --card-how-bg: #2D124D;
+  --card-dock-bg: #2D124D;
+  --dock-text: #F472B6;
 }
 
 /* SUNSET GOLD THEME - Twilight Dusk to Solstice Spectrum */
@@ -371,4 +463,27 @@
   --shadow-sm: 0 3px 8px rgba(249, 115, 22, 0.25);
   --shadow-md: 0 8px 20px rgba(249, 115, 22, 0.35);
   --shadow-lg: 0 14px 36px rgba(249, 115, 22, 0.45);
+
+  /* Theme-Reactive Mode & Header Styling */
+  --header-title-gradient: linear-gradient(135deg, #FDBA74 0%, #F97316 50%, #FB7185 100%);
+  --card-glass-bg: rgba(46, 35, 54, 0.7);
+  --card-glass-border: rgba(249, 115, 22, 0.35);
+  --mode-classic-bg: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  --mode-classic-glow: rgba(249, 115, 22, 0.4);
+  --mode-endless-bg: linear-gradient(135deg, #D946EF 0%, #A21CAF 100%);
+  --mode-endless-glow: rgba(217, 70, 239, 0.4);
+  --mode-time-bg: linear-gradient(135deg, #FBBF24 0%, #D97706 100%);
+  --mode-time-glow: rgba(251, 191, 36, 0.4);
+  --mode-moves-bg: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
+  --mode-moves-glow: rgba(239, 68, 68, 0.4);
+  --mode-ice-bg: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+  --mode-ice-glow: rgba(14, 165, 233, 0.4);
+  --mode-daily-bg: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  --mode-daily-glow: rgba(139, 92, 246, 0.4);
+
+  /* Reference Card Backgrounds */
+  --card-hero-bg: #2E2336;
+  --card-how-bg: #2E2336;
+  --card-dock-bg: #2E2336;
+  --dock-text: #FB923C;
 }

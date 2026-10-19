@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Play,
   Infinity as InfinityIcon,
   Timer,
   Target,
-  Grid3X3,
   Trophy,
   BarChart3,
   HelpCircle,
@@ -12,182 +11,321 @@ import {
   Info,
   Snowflake,
   Calendar,
+  Palette,
+  Volume2,
+  VolumeX,
+  Lightbulb,
+  ChevronRight,
 } from 'lucide-react';
-import { ActiveScreen, BoardSize, GameMode, RecordsState } from '../../types/game';
+import { ActiveScreen, BoardSize, GameMode, RecordsState, Theme } from '../../types/game';
 import './MainMenu.css';
 
 interface MainMenuProps {
   records: RecordsState;
   boardSize: BoardSize;
+  theme?: Theme;
+  soundEnabled?: boolean;
   onSelectBoardSize: (size: BoardSize) => void;
+  onSelectTheme?: (theme: Theme) => void;
+  onToggleSound?: () => void;
   onSelectMode: (mode: GameMode) => void;
   onNavigate: (screen: ActiveScreen) => void;
 }
 
+const THEME_CYCLE: Theme[] = ['CLASSIC', 'ICE', 'DARK', 'CYBER', 'SUNSET'];
+
+const THEME_INFO: Record<Theme, { name: string; emoji: string }> = {
+  CLASSIC: { name: 'Classic', emoji: '🌾' },
+  ICE: { name: 'Ice Frost', emoji: '🧊' },
+  DARK: { name: 'Dark Slate', emoji: '🌙' },
+  CYBER: { name: 'Cyber Neon', emoji: '⚡' },
+  SUNSET: { name: 'Sunset Gold', emoji: '🌅' },
+};
+
 export const MainMenu: React.FC<MainMenuProps> = ({
-  records,
   boardSize,
-  onSelectBoardSize,
+  theme = 'CLASSIC',
+  soundEnabled = true,
+  onSelectTheme,
+  onToggleSound,
   onSelectMode,
   onNavigate,
 }) => {
-  // Determine overall best score and highest tile
-  const globalBestScore = Math.max(
-    records.classicBest,
-    records.endlessBest,
-    records.timeAttackBest,
-    records.bomb?.bestScore || 0,
-    records.ice?.bestScore || 0
-  );
-  const globalHighestTile = Math.max(
-    records.classicHighestTile,
-    records.endlessHighestTile,
-    records.timeAttackHighestTile,
-    records.bomb?.highestTile || 0,
-    records.ice?.highestTile || 0
-  );
+  const [showThemePicker, setShowThemePicker] = useState(false);
+
+  const handleCycleTheme = () => {
+    if (!onSelectTheme) return;
+    const currentIndex = THEME_CYCLE.indexOf(theme);
+    const nextTheme = THEME_CYCLE[(currentIndex + 1) % THEME_CYCLE.length];
+    onSelectTheme(nextTheme);
+  };
 
   return (
     <div className="screen menu-screen">
-      {/* Header */}
-      <header className="menu-header">
-        <div className="menu-title-block">
-          <h1 className="menu-app-title">Merge 2048</h1>
-          <span className="offline-badge">OFFLINE PUZZLE</span>
+      <div className="reference-menu-container">
+        {/* 1. TOP BAR */}
+        <header className="ref-header">
+          <div className="ref-header-group left-group">
+            <button
+              className="ref-icon-btn"
+              onClick={handleCycleTheme}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                setShowThemePicker(!showThemePicker);
+              }}
+              title={`Active Theme: ${THEME_INFO[theme]?.name} (Click to switch)`}
+              aria-label="Switch Theme"
+            >
+              <Palette size={18} />
+            </button>
+            {onToggleSound && (
+              <button
+                className="ref-icon-btn"
+                onClick={onToggleSound}
+                title={soundEnabled ? 'Mute Sound' : 'Enable Sound'}
+                aria-label="Toggle Sound"
+              >
+                {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} className="muted-icon" />}
+              </button>
+            )}
+          </div>
+
+          <div className="ref-title-block">
+            <h1 className="ref-app-title">
+              MERGE <span className="title-number">2048</span>
+            </h1>
+            <div className="ref-offline-badge">
+              <span className="ref-dot" /> OFFLINE
+            </div>
+          </div>
+
+          <div className="ref-header-group right-group">
+            <button
+              className="ref-icon-btn"
+              onClick={() => onNavigate('HOW_TO_PLAY')}
+              title="How to Play"
+              aria-label="How to Play"
+            >
+              <HelpCircle size={18} />
+            </button>
+            <button
+              className="ref-icon-btn"
+              onClick={() => onNavigate('SETTINGS')}
+              title="Settings"
+              aria-label="Settings"
+            >
+              <SettingsIcon size={18} />
+            </button>
+          </div>
+        </header>
+
+        {/* Theme Picker Modal */}
+        {showThemePicker && (
+          <div className="theme-popover-overlay" onClick={() => setShowThemePicker(false)}>
+            <div className="theme-popover-card" onClick={(e) => e.stopPropagation()}>
+              <span className="theme-popover-title">SELECT VISUAL THEME</span>
+              <div className="theme-popover-grid">
+                {THEME_CYCLE.map((th) => (
+                  <button
+                    key={th}
+                    className={`theme-chip ${theme === th ? 'active' : ''}`}
+                    onClick={() => {
+                      onSelectTheme?.(th);
+                      setShowThemePicker(false);
+                    }}
+                  >
+                    <span>{THEME_INFO[th].emoji}</span>
+                    <span>{THEME_INFO[th].name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 2. HERO ILLUSTRATION / TUTORIAL CARD */}
+        <div className="ref-hero-card">
+          <div className="ref-hero-content">
+            <h2 className="ref-hero-headline">
+              Merge numbers.<br />
+              Reach <span className="headline-orange">2048!</span>
+            </h2>
+            <p className="ref-hero-desc">
+              Slide matching tiles together<br />
+              to create bigger numbers.
+            </p>
+            <div className="ref-hero-formula">
+              <div className="mini-tile tile-val-2">2</div>
+              <span className="formula-op">+</span>
+              <div className="mini-tile tile-val-2">2</div>
+              <span className="formula-arrow">➔</span>
+              <div className="mini-tile tile-val-4">4</div>
+            </div>
+          </div>
+
+          <div className="ref-hero-image-wrap">
+            <img
+              src="/board_hero.png"
+              alt="2048 Board Preview"
+              className="ref-hero-board-img"
+            />
+          </div>
         </div>
+
+        {/* 3. PLAY CLASSIC BIG ACTION BANNER */}
         <button
-          className="btn btn-icon settings-icon-btn"
-          onClick={() => onNavigate('SETTINGS')}
-          aria-label="Settings"
+          className="ref-play-classic-banner"
+          onClick={() => onSelectMode('CLASSIC')}
+          aria-label="Play Classic 2048"
         >
-          <SettingsIcon size={22} />
+          <div className="play-icon-circle">
+            <Play size={22} fill="currentColor" className="play-svg" />
+          </div>
+          <div className="play-classic-text">
+            <span className="play-classic-title">PLAY CLASSIC</span>
+            <span className="play-classic-sub">Start with the standard {boardSize}×{boardSize} board</span>
+          </div>
+          <ChevronRight size={22} className="play-chevron" />
         </button>
-      </header>
 
-      {/* Stats Summary Card */}
-      <div className="menu-stats-card">
-        <div className="menu-stat-item">
-          <span className="menu-stat-lbl">BEST SCORE</span>
-          <span className="menu-stat-val">{globalBestScore.toLocaleString()}</span>
-        </div>
-        <div className="menu-stat-divider" />
-        <div className="menu-stat-item">
-          <span className="menu-stat-lbl">HIGHEST TILE</span>
-          <span className="menu-stat-val">{globalHighestTile || 2}</span>
-        </div>
-      </div>
+        {/* 4. HOW TO PLAY QUICK GUIDE CARD */}
+        <button
+          className="ref-how-to-play-card"
+          onClick={() => onNavigate('HOW_TO_PLAY')}
+          aria-label="Open How to Play Guide"
+        >
+          <div className="lightbulb-circle-wrap">
+            <img src="/icon_how_to_play.png" alt="How to Play" className="how-to-play-logo-img" />
+          </div>
+          <div className="how-to-play-text">
+            <span className="how-to-play-title">How to Play</span>
+            <span className="how-to-play-sub">Quick guide for new players</span>
+          </div>
+          <ChevronRight size={22} className="guide-chevron" />
+        </button>
 
-      {/* Board Grid Size Selector Bar */}
-      <div className="grid-selector-card">
-        <div className="grid-selector-header">
-          <Grid3X3 size={18} className="grid-icon" />
-          <span className="grid-selector-label">SELECT BOARD SIZE</span>
+        {/* 5. MORE WAYS TO PLAY SECTION (DIVIDER + 2x2 GRID + DAILY CHALLENGE) */}
+        <div className="ref-more-ways-section">
+          <div className="ref-section-divider">
+            <span className="section-divider-title">MORE WAYS TO PLAY</span>
+            <div className="section-divider-line" />
+          </div>
+
+          <div className="ref-secondary-modes">
+            <div className="ref-modes-row">
+              {/* Endless */}
+              <button
+                className="ref-mode-card mode-endless-bg"
+                onClick={() => onSelectMode('ENDLESS')}
+                aria-label="Endless Mode"
+              >
+                <img src="/icon_endless.png" alt="Endless" className="ref-mode-logo-img" />
+                <div className="ref-mode-text-box">
+                  <span className="ref-mode-title">Endless</span>
+                  <span className="ref-mode-desc">Go beyond 2048</span>
+                </div>
+                <ChevronRight size={18} className="ref-mode-chevron" />
+              </button>
+
+              {/* Time Attack */}
+              <button
+                className="ref-mode-card mode-time-bg"
+                onClick={() => onSelectMode('TIME_ATTACK')}
+                aria-label="Time Attack Mode"
+              >
+                <img src="/icon_time.png" alt="Time Attack" className="ref-mode-logo-img" />
+                <div className="ref-mode-text-box">
+                  <span className="ref-mode-title">Time Attack</span>
+                  <span className="ref-mode-desc">Score before time runs out</span>
+                </div>
+                <ChevronRight size={18} className="ref-mode-chevron" />
+              </button>
+            </div>
+
+            <div className="ref-modes-row">
+              {/* Moves Challenge */}
+              <button
+                className="ref-mode-card mode-moves-bg"
+                onClick={() => onSelectMode('MOVES_CHALLENGE')}
+                aria-label="Moves Challenge Mode"
+              >
+                <img src="/icon_moves.png" alt="Moves Challenge" className="ref-mode-logo-img" />
+                <div className="ref-mode-text-box">
+                  <span className="ref-mode-title">Moves Challenge</span>
+                  <span className="ref-mode-desc">Reach target in limited moves</span>
+                </div>
+                <ChevronRight size={18} className="ref-mode-chevron" />
+              </button>
+
+              {/* Ice Mode */}
+              <button
+                className="ref-mode-card mode-ice-bg"
+                onClick={() => onSelectMode('ICE')}
+                aria-label="Ice Mode"
+              >
+                <img src="/icon_ice.png" alt="Ice Mode" className="ref-mode-logo-img" />
+                <div className="ref-mode-text-box">
+                  <span className="ref-mode-title">Ice Mode</span>
+                  <span className="ref-mode-desc">Break frozen tiles with smart merges</span>
+                </div>
+                <ChevronRight size={18} className="ref-mode-chevron" />
+              </button>
+            </div>
+
+            {/* Daily Challenge (Full-Width Banner) */}
+            <button
+              className="ref-mode-card mode-daily-full-bg"
+              onClick={() => onSelectMode('DAILY_CHALLENGE')}
+              aria-label="Daily Challenge"
+            >
+              <img src="/icon_daily.png" alt="Daily Challenge" className="ref-mode-logo-img" />
+              <div className="ref-mode-text-box">
+                <span className="ref-mode-title">Daily Challenge</span>
+                <span className="ref-mode-desc">A new puzzle every day. No internet required.</span>
+              </div>
+              <ChevronRight size={20} className="ref-mode-chevron" />
+            </button>
+          </div>
         </div>
-        <div className="grid-pills-row">
+
+        {/* 7. BOTTOM NAVIGATION DOCK (4 Buttons with Dividers) */}
+        <footer className="ref-dock-bar">
           <button
-            className={`grid-pill ${boardSize === 4 ? 'active' : ''}`}
-            onClick={() => onSelectBoardSize(4)}
+            className="ref-dock-btn"
+            onClick={() => onNavigate('BEST_SCORES')}
+            title="Best Scores"
           >
-            <span className="grid-pill-size">4×4</span>
-            <span className="grid-pill-sub">Classic</span>
+            <Trophy size={18} className="ref-dock-svg" />
+            <span>SCORES</span>
           </button>
+          <div className="ref-dock-divider" />
           <button
-            className={`grid-pill ${boardSize === 5 ? 'active' : ''}`}
-            onClick={() => onSelectBoardSize(5)}
+            className="ref-dock-btn"
+            onClick={() => onNavigate('STATISTICS')}
+            title="Statistics"
           >
-            <span className="grid-pill-size">5×5</span>
-            <span className="grid-pill-sub">Big</span>
+            <BarChart3 size={18} className="ref-dock-svg" />
+            <span>STATS</span>
           </button>
+          <div className="ref-dock-divider" />
           <button
-            className={`grid-pill ${boardSize === 6 ? 'active' : ''}`}
-            onClick={() => onSelectBoardSize(6)}
+            className="ref-dock-btn"
+            onClick={() => onNavigate('HOW_TO_PLAY')}
+            title="How to Play"
           >
-            <span className="grid-pill-size">6×6</span>
-            <span className="grid-pill-sub">Mega</span>
+            <HelpCircle size={18} className="ref-dock-svg" />
+            <span>RULES</span>
           </button>
-        </div>
-      </div>
-
-      {/* GAME MODES */}
-      <div className="menu-section">
-        <span className="menu-section-title">GAME MODES</span>
-        <div className="mode-cards-container">
-          <button className="mode-card classic-card" onClick={() => onSelectMode('CLASSIC')}>
-            <div className="mode-card-icon">
-              <Play size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">CLASSIC</h3>
-              <p className="mode-card-desc">Reach 2048</p>
-            </div>
+          <div className="ref-dock-divider" />
+          <button
+            className="ref-dock-btn"
+            onClick={() => onNavigate('ABOUT')}
+            title="About Game"
+          >
+            <Info size={18} className="ref-dock-svg" />
+            <span>ABOUT</span>
           </button>
-
-          <button className="mode-card endless-card" onClick={() => onSelectMode('ENDLESS')}>
-            <div className="mode-card-icon">
-              <InfinityIcon size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">ENDLESS</h3>
-              <p className="mode-card-desc">Go beyond 2048</p>
-            </div>
-          </button>
-
-          <button className="mode-card timeattack-card" onClick={() => onSelectMode('TIME_ATTACK')}>
-            <div className="mode-card-icon">
-              <Timer size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">TIME ATTACK</h3>
-              <p className="mode-card-desc">Score before time runs out</p>
-            </div>
-          </button>
-
-          <button className="mode-card moves-challenge-card" onClick={() => onSelectMode('MOVES_CHALLENGE')}>
-            <div className="mode-card-icon">
-              <Target size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">MOVES CHALLENGE</h3>
-              <p className="mode-card-desc">Reach target in limited moves</p>
-            </div>
-          </button>
-
-          <button className="mode-card ice-card" onClick={() => onSelectMode('ICE')}>
-            <div className="mode-card-icon">
-              <Snowflake size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">ICE MODE</h3>
-              <p className="mode-card-desc">Break frozen tiles with smart merges</p>
-            </div>
-          </button>
-
-          <button className="mode-card daily-card" onClick={() => onSelectMode('DAILY_CHALLENGE')}>
-            <div className="mode-card-icon">
-              <Calendar size={24} />
-            </div>
-            <div className="mode-card-info">
-              <h3 className="mode-card-title">DAILY CHALLENGE</h3>
-              <p className="mode-card-desc">A new puzzle every day. No internet required.</p>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      {/* Secondary Actions */}
-      <div className="secondary-menu-grid">
-        <button className="secondary-btn" onClick={() => onNavigate('BEST_SCORES')}>
-          <Trophy size={18} /> BEST SCORES
-        </button>
-        <button className="secondary-btn" onClick={() => onNavigate('STATISTICS')}>
-          <BarChart3 size={18} /> STATISTICS
-        </button>
-        <button className="secondary-btn" onClick={() => onNavigate('HOW_TO_PLAY')}>
-          <HelpCircle size={18} /> HOW TO PLAY
-        </button>
-        <button className="secondary-btn" onClick={() => onNavigate('ABOUT')}>
-          <Info size={18} /> ABOUT
-        </button>
+        </footer>
       </div>
     </div>
   );

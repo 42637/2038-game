@@ -196,7 +196,11 @@ export const App: React.FC = () => {
         <MainMenu
           records={records}
           boardSize={settings.boardSize}
+          theme={settings.theme}
+          soundEnabled={settings.soundEnabled}
           onSelectBoardSize={(size) => handleUpdateSettings({ ...settings, boardSize: size })}
+          onSelectTheme={(theme) => handleUpdateSettings({ ...settings, theme })}
+          onToggleSound={() => handleUpdateSettings({ ...settings, soundEnabled: !settings.soundEnabled })}
           onSelectMode={handleSelectMode}
           onNavigate={(screen) => setActiveScreen(screen)}
         />
