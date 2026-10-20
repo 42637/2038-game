@@ -19,6 +19,7 @@ import {
   X,
   Check,
   Grid3X3,
+  LayoutGrid,
 } from 'lucide-react';
 import { ActiveScreen, BoardSize, GameMode, RecordsState, Theme } from '../../types/game';
 import './MainMenu.css';
@@ -456,7 +457,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
             {/* Title & Desc */}
             <div className="size-modal-heading-block">
               <div className="size-modal-title-row">
-                <Grid3X3 size={18} className="size-grid-icon" />
+                <LayoutGrid size={18} className="size-grid-icon" />
                 <h3 className="size-modal-title">CHOOSE BOARD SIZE</h3>
               </div>
               <p className="size-modal-desc">
@@ -475,10 +476,21 @@ export const MainMenu: React.FC<MainMenuProps> = ({
                     onClick={() => setTempBoardSize(opt.size)}
                   >
                     <div className="size-option-left">
-                      <div className={`size-mini-grid size-grid-${opt.size}`}>
-                        {Array.from({ length: opt.size * opt.size }).map((_, i) => (
-                          <span key={i} className="size-mini-cell" />
-                        ))}
+                      <div className="size-mini-grid-wrap">
+                        <div className={`size-mini-grid size-grid-${opt.size}`}>
+                          {Array.from({ length: opt.size * opt.size }).map((_, i) => {
+                            let tileClass = '';
+                            if (i === 0) tileClass = 'mini-tile-2';
+                            else if (i === opt.size - 1) tileClass = 'mini-tile-4';
+                            else if (opt.size >= 5 && i === Math.floor((opt.size * opt.size) / 2)) tileClass = 'mini-tile-8';
+                            return (
+                              <span
+                                key={i}
+                                className={`size-mini-cell ${tileClass}`}
+                              />
+                            );
+                          })}
+                        </div>
                       </div>
                       <div className="size-option-text">
                         <div className="size-option-title-row">

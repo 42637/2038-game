@@ -60,30 +60,49 @@ export const GameBoard: React.FC<GameBoardProps> = ({
     }
   });
 
+  const KNOWN_TILE_VALUES = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072];
+
   const getTileColorClass = (tile: TileType): string => {
     if (tile.specialType === 'BOMB') {
       return 'tile-special-bomb';
     }
-    if (tile.value <= 8192) {
+    if (KNOWN_TILE_VALUES.includes(tile.value)) {
       return `tile-val-${tile.value}`;
     }
     return 'tile-val-super';
+  };
+
+  const getDynamicTileStyle = (tile: TileType): React.CSSProperties | undefined => {
+    if (tile.specialType === 'BOMB') return undefined;
+    if (!KNOWN_TILE_VALUES.includes(tile.value)) {
+      const power = Math.log2(tile.value > 0 ? tile.value : 2);
+      const hue = Math.round((power * 53 + 17) % 360);
+      return {
+        backgroundColor: `hsl(${hue}, 88%, 52%)`,
+        color: '#FFFFFF',
+        boxShadow: `0 0 24px hsl(${hue}, 90%, 60%), inset 0 2px 0 rgba(255,255,255,0.6)`,
+      };
+    }
+    return undefined;
   };
 
   const getFontSizeClass = (val: number): string => {
     if (gridSize === 6) {
       if (val < 100) return 'text-grid6-lg';
       if (val < 1000) return 'text-grid6-md';
-      return 'text-grid6-sm';
+      if (val < 10000) return 'text-grid6-sm';
+      return 'text-grid6-xs';
     } else if (gridSize === 5) {
       if (val < 100) return 'text-grid5-lg';
       if (val < 1000) return 'text-grid5-md';
-      return 'text-grid5-sm';
+      if (val < 10000) return 'text-grid5-sm';
+      return 'text-grid5-xs';
     } else {
       if (val < 100) return 'text-xl';
       if (val < 1000) return 'text-lg';
       if (val < 10000) return 'text-md';
-      return 'text-sm';
+      if (val < 100000) return 'text-sm';
+      return 'text-xs';
     }
   };
 
@@ -184,7 +203,10 @@ export const GameBoard: React.FC<GameBoardProps> = ({
                 onPointerDown={handleTileSmash}
                 onTouchEnd={handleTileSmash}
               >
-                <div className={`tile-inner ${colorClass} ${fontSizeClass} ${animClass} ${iceClass}`}>
+                <div
+                  className={`tile-inner ${colorClass} ${fontSizeClass} ${animClass} ${iceClass}`}
+                  style={getDynamicTileStyle(tile)}
+                >
                   {isHammerActive && (
                     <div className="hammer-target-overlay">
                       <span className="hammer-target-icon">🔨</span>
@@ -215,15 +237,15 @@ export const GameBoard: React.FC<GameBoardProps> = ({
 
           {/* Floating Score Popups Layer */}
           {floatingScores.map((fs) => {
-            const fsStyle: React.CSSProperties = {
+            const fsWrapperStyle: React.CSSProperties = {
               width: cellSizeCalc,
               height: cellSizeCalc,
               transform: `translate3d(calc(${fs.col} * (100% + ${gap}px)), calc(${fs.row} * (100% + ${gap}px)), 0)`,
             };
 
             return (
-              <div key={fs.id} className="floating-score-item" style={fsStyle}>
-                +{fs.score}
+              <div key={fs.id} className="floating-score-wrapper" style={fsWrapperStyle}>
+                <span className="floating-score-item">+{fs.score}</span>
               </div>
             );
           })}

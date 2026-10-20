@@ -21,47 +21,59 @@
   --accent-badge: #EA580C;
 
   /* Distinct High-Contrast Tile Colors for CLASSIC Theme */
-  --tile-2: #F5EEE6;
-  --tile-2-text: #574A40;
+  --tile-2: #FFFFFF;
+  --tile-2-text: #4E382A;
 
-  --tile-4: #EDE0C8;
-  --tile-4-text: #574A40;
+  --tile-4: #DDF2D1;
+  --tile-4-text: #2D5016;
 
-  --tile-8: #F2B179;
+  --tile-8: #FF8A3D;
   --tile-8-text: #FFFFFF;
 
-  --tile-16: #F59563;
+  --tile-16: #D81B60;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #F67C5F;
+  --tile-32: #1E88E5;
   --tile-32-text: #FFFFFF;
 
-  --tile-64: #E64C2E;
+  --tile-64: #43A047;
   --tile-64-text: #FFFFFF;
 
-  --tile-128: #EDCF72;
-  --tile-128-text: #FFFFFF;
+  --tile-128: #FDD835;
+  --tile-128-text: #3E2723;
 
-  --tile-256: #00B4D8;
+  --tile-256: #8E24AA;
   --tile-256-text: #FFFFFF;
 
-  --tile-512: #10B981;
+  --tile-512: #00ACC1;
   --tile-512-text: #FFFFFF;
 
-  --tile-1024: #6366F1;
+  --tile-1024: #E53935;
   --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #D946EF;
+  --tile-2048: #FF9100;
   --tile-2048-text: #FFFFFF;
 
-  --tile-4096: #8B5CF6;
+  --tile-4096: #3949AB;
   --tile-4096-text: #FFFFFF;
 
-  --tile-8192: #EC4899;
+  --tile-8192: #7CB342;
   --tile-8192-text: #FFFFFF;
 
-  --tile-super: #FFD700;
-  --tile-super-text: #1E293B;
+  --tile-16384: #FF1744;
+  --tile-16384-text: #FFFFFF;
+
+  --tile-32768: #00E5FF;
+  --tile-32768-text: #003740;
+
+  --tile-65536: #651FFF;
+  --tile-65536-text: #FFFFFF;
+
+  --tile-131072: #FFD700;
+  --tile-131072-text: #1A1A1A;
+
+  --tile-super: #F59E0B;
+  --tile-super-text: #FFFFFF;
 
   /* Radius & Shadows */
   --radius-sm: 12px;
@@ -105,8 +117,8 @@
   --bg-primary: #EBF5FF;
   --bg-surface: #D8ECFD;
   --bg-surface-hover: #C5E3FC;
-  --bg-board: #0F3866;
-  --bg-cell: #2A5A8C;
+  --bg-board: #0B2545;
+  --bg-cell: #134074;
 
   --text-main: #0B2545;
   --text-muted: #134074;
@@ -127,47 +139,59 @@
   --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for ICE Theme */
-  --tile-2: #E0F2FE;
-  --tile-2-text: #0369A1;
+  --tile-2: #FFFFFF;
+  --tile-2-text: #0C2340;
 
-  --tile-4: #BAE6FD;
-  --tile-4-text: #0284C7;
+  --tile-4: #A7F3D0;
+  --tile-4-text: #064E3B;
 
   --tile-8: #38BDF8;
-  --tile-8-text: #0F172A;
+  --tile-8-text: #082F49;
 
-  --tile-16: #00A8E8;
+  --tile-16: #1D4ED8;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #06B6D4;
+  --tile-32: #059669;
   --tile-32-text: #FFFFFF;
 
-  --tile-64: #0D9488;
+  --tile-64: #E11D48;
   --tile-64-text: #FFFFFF;
 
-  --tile-128: #6366F1;
+  --tile-128: #7C3AED;
   --tile-128-text: #FFFFFF;
 
-  --tile-256: #8B5CF6;
+  --tile-256: #D97706;
   --tile-256-text: #FFFFFF;
 
-  --tile-512: #D946EF;
+  --tile-512: #06B6D4;
   --tile-512-text: #FFFFFF;
 
-  --tile-1024: #F43F5E;
+  --tile-1024: #DB2777;
   --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #F59E0B;
-  --tile-2048-text: #FFFFFF;
+  --tile-2048: #FACC15;
+  --tile-2048-text: #713F12;
 
-  --tile-4096: #10B981;
+  --tile-4096: #4338CA;
   --tile-4096-text: #FFFFFF;
 
-  --tile-8192: #3B82F6;
+  --tile-8192: #65A30D;
   --tile-8192-text: #FFFFFF;
 
-  --tile-super: #7DD3FC;
-  --tile-super-text: #0C4A6E;
+  --tile-16384: #EA580C;
+  --tile-16384-text: #FFFFFF;
+
+  --tile-32768: #6D28D9;
+  --tile-32768-text: #FFFFFF;
+
+  --tile-65536: #0D9488;
+  --tile-65536-text: #FFFFFF;
+
+  --tile-131072: #FF8500;
+  --tile-131072-text: #FFFFFF;
+
+  --tile-super: #38BDF8;
+  --tile-super-text: #082F49;
 
   --shadow-sm: 0 3px 8px rgba(15, 56, 102, 0.12);
   --shadow-md: 0 8px 20px rgba(15, 56, 102, 0.18);
@@ -202,8 +226,8 @@
   --bg-primary: #0F172A;
   --bg-surface: #1E293B;
   --bg-surface-hover: #334155;
-  --bg-board: #1E293B;
-  --bg-cell: #2A374A;
+  --bg-board: #0D1117;
+  --bg-cell: #161B22;
 
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
@@ -224,47 +248,59 @@
   --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for DARK Theme */
-  --tile-2: #38495E;
-  --tile-2-text: #F8FAFC;
+  --tile-2: #E2E8F0;
+  --tile-2-text: #0F172A;
 
-  --tile-4: #4A5F78;
-  --tile-4-text: #F8FAFC;
+  --tile-4: #FDE68A;
+  --tile-4-text: #78350F;
 
-  --tile-8: #F97316;
+  --tile-8: #FB923C;
   --tile-8-text: #FFFFFF;
 
-  --tile-16: #EF4444;
+  --tile-16: #F43F5E;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #10B981;
-  --tile-32-text: #FFFFFF;
+  --tile-32: #06B6D4;
+  --tile-32-text: #083344;
 
-  --tile-64: #06B6D4;
-  --tile-64-text: #FFFFFF;
+  --tile-64: #10B981;
+  --tile-64-text: #064E3B;
 
-  --tile-128: #6366F1;
+  --tile-128: #8B5CF6;
   --tile-128-text: #FFFFFF;
 
-  --tile-256: #A855F7;
-  --tile-256-text: #FFFFFF;
+  --tile-256: #FACC15;
+  --tile-256-text: #713F12;
 
   --tile-512: #EC4899;
   --tile-512-text: #FFFFFF;
 
-  --tile-1024: #F59E0B;
+  --tile-1024: #3B82F6;
   --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #14B8A6;
+  --tile-2048: #FF9900;
   --tile-2048-text: #FFFFFF;
 
-  --tile-4096: #E11D48;
+  --tile-4096: #14B8A6;
   --tile-4096-text: #FFFFFF;
 
-  --tile-8192: #84CC16;
-  --tile-8192-text: #1E293B;
+  --tile-8192: #6366F1;
+  --tile-8192-text: #FFFFFF;
+
+  --tile-16384: #A3E635;
+  --tile-16384-text: #1A2E05;
+
+  --tile-32768: #EF4444;
+  --tile-32768-text: #FFFFFF;
+
+  --tile-65536: #A855F7;
+  --tile-65536-text: #FFFFFF;
+
+  --tile-131072: #E0F2FE;
+  --tile-131072-text: #0369A1;
 
   --tile-super: #FACC15;
-  --tile-super-text: #0F172A;
+  --tile-super-text: #000000;
 
   --shadow-sm: 0 3px 8px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.45);
@@ -296,11 +332,11 @@
 
 /* CYBER NEON THEME - Cyberpunk Synthwave Electric Palette */
 [data-theme="cyber"] {
-  --bg-primary: #180828;
-  --bg-surface: #2D124D;
-  --bg-surface-hover: #3D1A68;
-  --bg-board: #301052;
-  --bg-cell: #451774;
+  --bg-primary: #120520;
+  --bg-surface: #220B38;
+  --bg-surface-hover: #331252;
+  --bg-board: #140526;
+  --bg-cell: #230B3E;
 
   --text-main: #F472B6;
   --text-muted: #A78BFA;
@@ -321,48 +357,59 @@
   --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for CYBER Theme */
-  --tile-2: #6B21A8;
-  --tile-2-text: #FFFFFF;
+  --tile-2: #A7F3D0;
+  --tile-2-text: #064E3B;
 
-  --tile-4: #7E22CE;
-  --tile-4-text: #FFFFFF;
+  --tile-4: #FEF08A;
+  --tile-4-text: #713F12;
 
-
-  --tile-8: #EC4899;
+  --tile-8: #FF007F;
   --tile-8-text: #FFFFFF;
 
-  --tile-16: #F43F5E;
-  --tile-16-text: #FFFFFF;
+  --tile-16: #00F0FF;
+  --tile-16-text: #003840;
 
-  --tile-32: #F59E0B;
-  --tile-32-text: #180828;
+  --tile-32: #FF6B00;
+  --tile-32-text: #FFFFFF;
 
-  --tile-64: #10B981;
-  --tile-64-text: #180828;
+  --tile-64: #9D00FF;
+  --tile-64-text: #FFFFFF;
 
-  --tile-128: #06B6D4;
-  --tile-128-text: #180828;
+  --tile-128: #39FF14;
+  --tile-128-text: #0B3802;
 
-  --tile-256: #8B5CF6;
+  --tile-256: #0066FF;
   --tile-256-text: #FFFFFF;
 
-  --tile-512: #E0E7FF;
-  --tile-512-text: #312E81;
+  --tile-512: #FFB800;
+  --tile-512-text: #382400;
 
-  --tile-1024: #D946EF;
+  --tile-1024: #D900FF;
   --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #A3E635;
-  --tile-2048-text: #14532D;
+  --tile-2048: #FFE600;
+  --tile-2048-text: #2B2500;
 
-  --tile-4096: #38BDF8;
-  --tile-4096-text: #0C4A6E;
+  --tile-4096: #FF003C;
+  --tile-4096-text: #FFFFFF;
 
-  --tile-8192: #FB7185;
-  --tile-8192-text: #FFFFFF;
+  --tile-8192: #00FFB2;
+  --tile-8192-text: #003D2A;
 
-  --tile-super: #FDE047;
-  --tile-super-text: #180828;
+  --tile-16384: #4D00FF;
+  --tile-16384-text: #FFFFFF;
+
+  --tile-32768: #FF5757;
+  --tile-32768-text: #FFFFFF;
+
+  --tile-65536: #00E5FF;
+  --tile-65536-text: #003640;
+
+  --tile-131072: #FFFFFF;
+  --tile-131072-text: #120520;
+
+  --tile-super: #FF007F;
+  --tile-super-text: #FFFFFF;
 
   --shadow-sm: 0 3px 8px rgba(236, 72, 153, 0.25);
   --shadow-md: 0 8px 20px rgba(236, 72, 153, 0.35);
@@ -394,11 +441,11 @@
 
 /* SUNSET GOLD THEME - Twilight Dusk to Solstice Spectrum */
 [data-theme="sunset"] {
-  --bg-primary: #1F1924;
-  --bg-surface: #2E2336;
-  --bg-surface-hover: #40324B;
-  --bg-board: #2B1632;
-  --bg-cell: #3E1E46;
+  --bg-primary: #1A0D18;
+  --bg-surface: #291526;
+  --bg-surface-hover: #3B1F37;
+  --bg-board: #2A0826;
+  --bg-cell: #42123D;
 
   --text-main: #FDBA74;
   --text-muted: #F97316;
@@ -419,47 +466,59 @@
   --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for SUNSET Theme */
-  --tile-2: #5D2966;
-  --tile-2-text: #FED7AA;
+  --tile-2: #FFF7ED;
+  --tile-2-text: #431407;
 
-  --tile-4: #752E7E;
-  --tile-4-text: #FFEDD5;
+  --tile-4: #FDE047;
+  --tile-4-text: #713F12;
 
-  --tile-8: #C2410C;
-  --tile-8-text: #FFFFFF;
+  --tile-8: #FB923C;
+  --tile-8-text: #431407;
 
-  --tile-16: #EA580C;
+  --tile-16: #E11D48;
   --tile-16-text: #FFFFFF;
 
-  --tile-32: #E11D48;
+  --tile-32: #9333EA;
   --tile-32-text: #FFFFFF;
 
-  --tile-64: #D946EF;
+  --tile-64: #2563EB;
   --tile-64-text: #FFFFFF;
 
-  --tile-128: #F59E0B;
+  --tile-128: #059669;
   --tile-128-text: #FFFFFF;
 
-  --tile-256: #84CC16;
-  --tile-256-text: #1E293B;
+  --tile-256: #C026D3;
+  --tile-256-text: #FFFFFF;
 
-  --tile-512: #06B6D4;
+  --tile-512: #D97706;
   --tile-512-text: #FFFFFF;
 
-  --tile-1024: #8B5CF6;
+  --tile-1024: #4F46E5;
   --tile-1024-text: #FFFFFF;
 
-  --tile-2048: #F43F5E;
-  --tile-2048-text: #FFFFFF;
+  --tile-2048: #FACC15;
+  --tile-2048-text: #713F12;
 
-  --tile-4096: #FBBF24;
-  --tile-4096-text: #1F1924;
+  --tile-4096: #DC2626;
+  --tile-4096-text: #FFFFFF;
 
-  --tile-8192: #10B981;
+  --tile-8192: #0891B2;
   --tile-8192-text: #FFFFFF;
 
+  --tile-16384: #7C3AED;
+  --tile-16384-text: #FFFFFF;
+
+  --tile-32768: #F43F5E;
+  --tile-32768-text: #FFFFFF;
+
+  --tile-65536: #84CC16;
+  --tile-65536-text: #1A2E05;
+
+  --tile-131072: #FFFFFF;
+  --tile-131072-text: #2A0826;
+
   --tile-super: #FACC15;
-  --tile-super-text: #1F1924;
+  --tile-super-text: #431407;
 
   --shadow-sm: 0 3px 8px rgba(249, 115, 22, 0.25);
   --shadow-md: 0 8px 20px rgba(249, 115, 22, 0.35);

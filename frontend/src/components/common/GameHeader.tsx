@@ -14,6 +14,7 @@ interface GameHeaderProps {
   targetTile?: number;
   timeRemaining?: number;
   currentTheme?: Theme;
+  toastMessage?: { text: string; type?: 'defuse' | 'penalty' | 'info' } | null;
   onCycleTheme?: () => void;
   onSelectTheme?: (theme: Theme) => void;
   onRestart?: () => void;
@@ -32,6 +33,7 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
   targetTile,
   timeRemaining,
   currentTheme = 'CLASSIC',
+  toastMessage,
   onCycleTheme,
   onRestart,
   onPause,
@@ -82,29 +84,37 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
           </button>
         </div>
 
-        {/* Center Title & Board Size Pill */}
+        {/* Center Title & Board Size Pill OR Active Theme / In-game Toast Badge */}
         <div className="header-center-title-group">
-          <div className="title-with-rays">
-            <span className="title-ray left-ray">
-              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="2" y1="7" x2="8" y2="7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="4" y1="2" x2="10" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                <line x1="4" y1="12" x2="10" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </span>
-            <h1 className="game-mode-heading">{getModeLabel(mode)}</h1>
-            <span className="title-ray right-ray">
-              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="16" y1="7" x2="10" y2="7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="14" y1="2" x2="8" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                <line x1="14" y1="12" x2="8" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </span>
-          </div>
+          {toastMessage ? (
+            <div className={`header-toast-badge ${toastMessage.type ? `toast-${toastMessage.type}` : ''}`}>
+              <span className="header-toast-text">{toastMessage.text}</span>
+            </div>
+          ) : (
+            <>
+              <div className="title-with-rays">
+                <span className="title-ray left-ray">
+                  <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="2" y1="7" x2="8" y2="7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                    <line x1="4" y1="2" x2="10" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="4" y1="12" x2="10" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </span>
+                <h1 className="game-mode-heading">{getModeLabel(mode)}</h1>
+                <span className="title-ray right-ray">
+                  <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="16" y1="7" x2="10" y2="7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                    <line x1="14" y1="2" x2="8" y2="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="14" y1="12" x2="8" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </div>
 
-          <div className="board-size-pill">
-            <span>{boardSize}×{boardSize}</span>
-          </div>
+              <div className="board-size-pill">
+                <span>{boardSize}×{boardSize}</span>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Right Action Buttons (Direct Theme Switcher & Settings) */}

@@ -120,6 +120,49 @@
   justify-content: center;
 }
 
+/* Integrated Top-Bar Toast Notification Badge */
+.header-toast-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 16px;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border: 1.5px solid var(--accent-primary);
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), 0 0 12px var(--accent-glow, rgba(0, 0, 0, 0.1));
+  font-weight: 900;
+  font-size: 0.92rem;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  animation: headerToastPop 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-sizing: border-box;
+}
+
+.header-toast-badge.toast-defuse {
+  background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+  color: #FFFFFF;
+  border-color: #34D399;
+}
+
+.header-toast-badge.toast-penalty {
+  background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+  color: #FFFFFF;
+  border-color: #F87171;
+}
+
+@keyframes headerToastPop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /* Theme Picker Dropdown Popover */
 .theme-picker-wrapper {
   position: relative;

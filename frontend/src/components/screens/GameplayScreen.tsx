@@ -752,14 +752,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
       {/* Confetti Celebration Overlay */}
       {showConfetti && <ConfettiEffect durationMs={3000} onFinish={() => setShowConfetti(false)} />}
 
-      {/* Milestone Toast Overlay */}
-      {toastMessage && (
-        <div className={`milestone-toast ${toastMessage.type ? `toast-${toastMessage.type}` : ''}`}>
-          <span>{toastMessage.text}</span>
-        </div>
-      )}
-
-      {/* Gameplay Header */}
+      {/* Gameplay Header with integrated top-bar toast banner */}
       <GameHeader
         mode={mode}
         boardSize={gameState.boardSize || activeBoardSize}
@@ -771,6 +764,7 @@ export const GameplayScreen: React.FC<GameplayScreenProps> = ({
         targetTile={gameState.targetTile}
         timeRemaining={mode === 'TIME_ATTACK' ? gameState.timeRemaining : undefined}
         currentTheme={settings.theme}
+        toastMessage={toastMessage}
         onCycleTheme={handleCycleTheme}
         onSelectTheme={handleSelectTheme}
         onRestart={handleRequestRestart}
