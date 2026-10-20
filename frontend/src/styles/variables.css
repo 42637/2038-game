@@ -203,7 +203,7 @@
   --bg-surface: #1E293B;
   --bg-surface-hover: #334155;
   --bg-board: #1E293B;
-  --bg-cell: #334155;
+  --bg-cell: #2A374A;
 
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
@@ -224,10 +224,10 @@
   --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for DARK Theme */
-  --tile-2: #1E293B;
+  --tile-2: #38495E;
   --tile-2-text: #F8FAFC;
 
-  --tile-4: #334155;
+  --tile-4: #4A5F78;
   --tile-4-text: #F8FAFC;
 
   --tile-8: #F97316;
@@ -299,8 +299,8 @@
   --bg-primary: #180828;
   --bg-surface: #2D124D;
   --bg-surface-hover: #3D1A68;
-  --bg-board: #4C1D95;
-  --bg-cell: #5B21B6;
+  --bg-board: #301052;
+  --bg-cell: #451774;
 
   --text-main: #F472B6;
   --text-muted: #A78BFA;
@@ -321,11 +321,12 @@
   --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for CYBER Theme */
-  --tile-2: #2E1065;
+  --tile-2: #6B21A8;
   --tile-2-text: #FFFFFF;
 
-  --tile-4: #3B0764;
+  --tile-4: #7E22CE;
   --tile-4-text: #FFFFFF;
+
 
   --tile-8: #EC4899;
   --tile-8-text: #FFFFFF;
@@ -396,8 +397,8 @@
   --bg-primary: #1F1924;
   --bg-surface: #2E2336;
   --bg-surface-hover: #40324B;
-  --bg-board: #3B2042;
-  --bg-cell: #4C2B54;
+  --bg-board: #2B1632;
+  --bg-cell: #3E1E46;
 
   --text-main: #FDBA74;
   --text-muted: #F97316;
@@ -418,10 +419,10 @@
   --radius-full: 9999px;
 
   /* Distinct High-Contrast Tile Colors for SUNSET Theme */
-  --tile-2: #3A233D;
+  --tile-2: #5D2966;
   --tile-2-text: #FED7AA;
 
-  --tile-4: #502B49;
+  --tile-4: #752E7E;
   --tile-4-text: #FFEDD5;
 
   --tile-8: #C2410C;

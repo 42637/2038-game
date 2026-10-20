@@ -208,6 +208,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
 }
 
 .record-stat-lbl {
@@ -215,10 +218,15 @@
   font-weight: 800;
   color: var(--text-muted);
   letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .record-stat-num {
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-main);
+  text-align: center;
+  line-height: 1.2;
 }

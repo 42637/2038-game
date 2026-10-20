@@ -45,8 +45,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-weight: 800;
   font-size: 1rem;
+  line-height: 1;
   color: var(--text-main);
   flex-shrink: 0;
 }

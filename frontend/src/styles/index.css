@@ -81,16 +81,19 @@ html, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   gap: 8px;
   font-family: var(--font-family);
   font-weight: 700;
   font-size: 1.05rem;
+  line-height: 1.2;
   padding: 14px 24px;
   border-radius: var(--radius-md);
   border: none;
   cursor: pointer;
   transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
   text-decoration: none;
+  box-sizing: border-box;
 }
 
 .btn:active {
@@ -128,6 +131,66 @@ html, body {
   border-radius: var(--radius-sm);
   background-color: var(--bg-surface);
   color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Shared Sub-Screen Layout & Alignment */
+.sub-screen {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+}
+
+.sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sub-header h2 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+  text-align: center;
+  flex: 1;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sub-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  padding-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.sub-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 2px;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 /* Modal Backdrop */

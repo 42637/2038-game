@@ -66,10 +66,23 @@
 
 .grid-cell {
   background-color: var(--bg-cell);
-  border-radius: var(--radius-md, 14px);
+  border-radius: 12px;
   width: 100%;
   height: 100%;
   transition: border-color 0.2s ease, background-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.grid-size-4 .grid-cell {
+  border-radius: 12px;
+}
+
+.grid-size-5 .grid-cell {
+  border-radius: 9px;
+}
+
+.grid-size-6 .grid-cell {
+  border-radius: 7px;
 }
 
 /* Bomb Blast Target Highlight on Grid Cells */
@@ -125,6 +138,7 @@
   transition: transform 0.12s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
   transform: translateZ(0);
+  box-sizing: border-box;
 }
 
 .grid-size-5 .tile-wrapper {
@@ -135,62 +149,97 @@
   padding: 0;
 }
 
-
 /* Inner Tile Element - 3D Glassmorphism Bevel Depth & High-Contrast Typography */
 .tile-inner {
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-md, 14px);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-weight: 900;
+  line-height: 1;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 2px 0 rgba(255, 255, 255, 0.35);
   transition: background-color 0.12s ease, transform 0.12s ease;
   transform: translateZ(0);
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.grid-size-4 .tile-inner {
+  border-radius: 12px;
+}
+
+.grid-size-5 .tile-inner {
+  border-radius: 9px;
+}
+
+.grid-size-6 .tile-inner {
+  border-radius: 7px;
+}
+
+.tile-inner span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 /* Font Sizing Helpers for 4x4 */
 .text-xl {
   font-size: 2.1rem;
+  line-height: 1;
 }
 
 .text-lg {
   font-size: 1.8rem;
+  line-height: 1;
 }
 
 .text-md {
   font-size: 1.45rem;
+  line-height: 1;
 }
 
 .text-sm {
   font-size: 1.15rem;
+  line-height: 1;
 }
 
 /* Font Sizing Helpers for 5x5 */
 .text-grid5-lg {
   font-size: 1.55rem;
+  line-height: 1;
 }
 
 .text-grid5-md {
   font-size: 1.25rem;
+  line-height: 1;
 }
 
 .text-grid5-sm {
   font-size: 1.0rem;
+  line-height: 1;
 }
 
 /* Font Sizing Helpers for 6x6 */
 .text-grid6-lg {
   font-size: 1.25rem;
+  line-height: 1;
 }
 
 .text-grid6-md {
   font-size: 1.05rem;
+  line-height: 1;
 }
 
 .text-grid6-sm {
   font-size: 0.85rem;
+  line-height: 1;
 }
 
 /* Distinct High-Contrast 3D Tile Colors & Dynamic Halos */
